@@ -39,7 +39,8 @@ Get recent blocks.
 
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
-| `limit` | `u32` | 20 | Number of blocks to return |
+| `limit` | `u32` | 20 | Number of items to return |
+| `offset` | `u32` | 0 | Number of items to skip (for pagination) |
 
 **Response:**
 
@@ -226,3 +227,40 @@ Get the current validator set.
   "total_count": 4
 }
 ```
+
+---
+
+### `GET /api/accounts/:account/tokens`
+
+Get token contracts associated with an account (contracts that have sent tokens to or received tokens from this account).
+
+**Response:** Array of contract ID strings.
+
+```json
+["7efd4515fcea2a83b0b0c12a154b82ca7fc432d1a125406f5973fa7a72a1ccdf"]
+```
+
+---
+
+### `GET /api/contracts`
+
+List all deployed contracts.
+
+**Response:** Array of contract ID strings.
+
+```json
+["7efd4515fcea2a83...", "12f2f058c9809155..."]
+```
+
+---
+
+## Pagination
+
+All list endpoints (`/api/blocks`, `/api/txs`, `/api/events`, `/api/accounts/:id/txs`) support pagination:
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `limit` | `u32` | 20 | Items per page |
+| `offset` | `u32` | 0 | Items to skip |
+
+**Example:** `GET /api/txs?limit=25&offset=50` returns transactions 51-75 (newest first).

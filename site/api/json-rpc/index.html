@@ -1265,6 +1265,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#solen_callview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        solen_callView
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#solen_getvestinginfo" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2164,6 +2175,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#solen_callview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        solen_callView
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#solen_getvestinginfo" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2692,6 +2714,73 @@
 </tbody>
 </table>
 <hr />
+<h3 id="solen_callview"><code>solen_callView</code><a class="headerlink" href="#solen_callview" title="Permanent link">&para;</a></h3>
+<p>Read-only contract call — no signature or transaction required. Executes a contract method in a sandboxed VM and returns the result without modifying state.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>contract_id</code></td>
+<td><code>string</code></td>
+<td>Hex-encoded contract account ID</td>
+</tr>
+<tr>
+<td><code>method</code></td>
+<td><code>string</code></td>
+<td>Method name to call</td>
+</tr>
+<tr>
+<td><code>args</code></td>
+<td><code>string?</code></td>
+<td>Hex-encoded arguments (optional)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>success</code></td>
+<td><code>bool</code></td>
+<td>Whether the call succeeded</td>
+</tr>
+<tr>
+<td><code>return_data</code></td>
+<td><code>string</code></td>
+<td>Hex-encoded return data</td>
+</tr>
+<tr>
+<td><code>gas_used</code></td>
+<td><code>u64</code></td>
+<td>Gas consumed</td>
+</tr>
+<tr>
+<td><code>error</code></td>
+<td><code>string?</code></td>
+<td>Error message (if failed)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://127.0.0.1:29944<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;method&quot;:&quot;solen_callView&quot;,&quot;params&quot;:[&quot;&lt;contract-id&gt;&quot;,&quot;total_supply&quot;],&quot;id&quot;:1}&#39;</span>
+</code></pre></div>
+<hr />
 <h3 id="solen_getvestinginfo"><code>solen_getVestingInfo</code><a class="headerlink" href="#solen_getvestinginfo" title="Permanent link">&para;</a></h3>
 <p>Get vesting schedule information for an account.</p>
 <p><strong>Parameters:</strong></p>
@@ -2755,9 +2844,9 @@
 </table>
 <p>If the account has no vesting schedule, <code>has_schedule</code> is <code>false</code> and all amounts are <code>"0"</code>.</p>
 <p><strong>Example:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://127.0.0.1:29944<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;method&quot;:&quot;solen_getVestingInfo&quot;,&quot;params&quot;:[&quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot;],&quot;id&quot;:1}&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://127.0.0.1:29944<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;method&quot;:&quot;solen_getVestingInfo&quot;,&quot;params&quot;:[&quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot;],&quot;id&quot;:1}&#39;</span>
 </code></pre></div>
 <hr />
 <h2 id="system-contract-calls">System Contract Calls<a class="headerlink" href="#system-contract-calls" title="Permanent link">&para;</a></h2>

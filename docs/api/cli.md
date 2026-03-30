@@ -257,6 +257,7 @@ The CLI simulates the call first, then submits if simulation succeeds.
 |--------|-------------|
 | `--rpc <URL>` | JSON-RPC endpoint (default: `http://127.0.0.1:9944`) |
 | `--network <NETWORK>` | Use network defaults (devnet, testnet, mainnet) |
+| `--chain-id <ID>` | Chain ID for signing (devnet=1337, testnet=9000, mainnet=1) |
 
 ```bash
 # Use a different RPC endpoint

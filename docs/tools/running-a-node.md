@@ -29,6 +29,7 @@ Options:
     --validator-seed <HEX>     32-byte hex seed for validator key
     --no-p2p                   Disable P2P networking
     --in-memory                Use in-memory storage (no persistence)
+    --archive                  Archive mode: keep all blocks (no pruning)
     --explorer-port <PORT>     Explorer API port (0 to disable)
 ```
 

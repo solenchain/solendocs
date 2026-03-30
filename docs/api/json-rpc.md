@@ -250,6 +250,37 @@ Get staking information for an account (delegations, undelegations).
 
 ---
 
+### `solen_callView`
+
+Read-only contract call — no signature or transaction required. Executes a contract method in a sandboxed VM and returns the result without modifying state.
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `contract_id` | `string` | Hex-encoded contract account ID |
+| `method` | `string` | Method name to call |
+| `args` | `string?` | Hex-encoded arguments (optional) |
+
+**Returns:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `success` | `bool` | Whether the call succeeded |
+| `return_data` | `string` | Hex-encoded return data |
+| `gas_used` | `u64` | Gas consumed |
+| `error` | `string?` | Error message (if failed) |
+
+**Example:**
+
+```bash
+curl -s -X POST http://127.0.0.1:29944 \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","method":"solen_callView","params":["<contract-id>","total_supply"],"id":1}'
+```
+
+---
+
 ### `solen_getVestingInfo`
 
 Get vesting schedule information for an account.

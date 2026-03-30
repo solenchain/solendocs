@@ -50,7 +50,8 @@ A full ERC20-equivalent token contract with minting, transfers, and allowances.
 
 | Method | Arguments | Description |
 |--------|-----------|-------------|
-| `init` | — | Initialize the token, setting caller as owner |
+| `abi` | — | Returns JSON array of all methods |
+| `init` | `name_len[1]+name[]+symbol_len[1]+symbol[]` | Initialize with metadata |
 | `mint` | `to (32 bytes) + amount (u128 LE)` | Mint tokens to an account (owner only) |
 | `transfer` | `to (32 bytes) + amount (u128 LE)` | Transfer tokens from caller to recipient |
 | `approve` | `spender (32 bytes) + amount (u128 LE)` | Approve spender to use caller's tokens |
@@ -58,6 +59,10 @@ A full ERC20-equivalent token contract with minting, transfers, and allowances.
 | `balance_of` | `account (32 bytes)` | Query token balance |
 | `allowance` | `owner (32 bytes) + spender (32 bytes)` | Query allowance |
 | `total_supply` | — | Query total token supply |
+| `name` | — | Token name (UTF-8 string) |
+| `symbol` | — | Token symbol/ticker |
+| `decimals` | — | Decimal places (default 8) |
+| `owner` | — | Contract owner address |
 
 ### Argument Encoding
 
@@ -81,8 +86,13 @@ cargo build --target wasm32-unknown-unknown --release
 # Deploy
 solen deploy faucet target/wasm32-unknown-unknown/release/solen_example_token.wasm
 
-# Initialize (sets caller as owner)
-solen call faucet <TOKEN_ID> init
+# Initialize with name and symbol
+NAME_ARGS=$(python3 -c "
+name = b'My Token'
+symbol = b'MTK'
+print((bytes([len(name)]) + name + bytes([len(symbol)]) + symbol).hex())
+")
+solen call faucet <TOKEN_ID> init --args "$NAME_ARGS"
 
 # Mint 1,000,000 tokens to faucet
 TO="197f6b23e16c8532c6abc838facd5ea789be0c76b2920334039bfa8b3d368d61"
@@ -96,6 +106,66 @@ solen call faucet <TOKEN_ID> balance_of --args "${TO}"
 ALICE="139c31e8543b19629ea93c90b291d684aec0ca432cc0efda170570572c62e519"
 AMOUNT=$(python3 -c "print((50000).to_bytes(16, 'little').hex())")
 solen call faucet <TOKEN_ID> transfer --args "${ALICE}${AMOUNT}"
+```
+
+### ABI Discovery
+
+SRC-20 tokens implement an `abi()` method that returns a JSON array of available methods. The explorer uses this to auto-populate the "Read Contract" UI. Query it via `solen_callView`:
+
+```bash
+curl -s -X POST http://127.0.0.1:29944 \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","method":"solen_callView","params":["<TOKEN_ID>","abi"],"id":1}'
+```
+
+---
+
+## NFT (SRC-721)
+
+A non-fungible token contract with sequential token IDs, minting, and transfers.
+
+**Source:** `examples/contracts/nft/src/lib.rs`
+
+### Methods
+
+| Method | Arguments | Description |
+|--------|-----------|-------------|
+| `abi` | — | Returns JSON array of all methods |
+| `init` | `name_len[1]+name[]+symbol_len[1]+symbol[]` | Initialize collection |
+| `mint` | `to (32 bytes)` | Mint next NFT to address (owner only) |
+| `transfer` | `to (32 bytes) + token_id (u64 LE)` | Transfer NFT |
+| `owner_of` | `token_id (u64 LE)` | Query owner of NFT |
+| `balance_of` | `account (32 bytes)` | Query NFT count |
+| `total_supply` | — | Total minted NFTs |
+| `name` | — | Collection name |
+| `symbol` | — | Collection symbol |
+| `owner` | — | Contract owner |
+
+### Usage
+
+```bash
+# Build
+cd examples/contracts/nft
+cargo build --target wasm32-unknown-unknown --release
+
+# Deploy
+solen deploy mykey target/wasm32-unknown-unknown/release/solen_example_nft.wasm
+
+# Initialize
+NAME_ARGS=$(python3 -c "
+name = b'My NFT Collection'
+symbol = b'MNFT'
+print((bytes([len(name)]) + name + bytes([len(symbol)]) + symbol).hex())
+")
+solen call mykey <NFT_ID> init --args "$NAME_ARGS"
+
+# Mint NFT #1 to an address
+RECIPIENT="197f6b23e16c8532c6abc838facd5ea789be0c76b2920334039bfa8b3d368d61"
+solen call mykey <NFT_ID> mint --args "$RECIPIENT"
+
+# Query owner of NFT #1
+TOKEN_ID=$(python3 -c "print((1).to_bytes(8, 'little').hex())")
+solen call mykey <NFT_ID> owner_of --args "$TOKEN_ID"
 ```
 
 ## Writing Your Own Contract
