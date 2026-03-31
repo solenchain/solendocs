@@ -2474,6 +2474,7 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>solen<span class="w"> </span>--rpc<span class="w"> </span>https://testnet-rpc.solenchain.com<span class="w"> </span>--chain-id<span class="w"> </span><span class="m">9000</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span>register-validator<span class="w"> </span>my-validator<span class="w"> </span><span class="m">500000</span>
 </code></pre></div>
+<p>All CLI amounts are in <strong>SOLEN</strong> (not base units). Decimals are supported: <code>100.5</code> = 100.5 SOLEN.</p>
 <p>This calls the staking system contract to register your account as a validator with self-stake. Your validator will be eligible for block production starting the next epoch (~100 blocks).</p>
 <h3 id="3-run-the-validator-node">3. Run the Validator Node<a class="headerlink" href="#3-run-the-validator-node" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>solen-node<span class="w"> </span><span class="se">\</span>

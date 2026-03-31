@@ -95,6 +95,8 @@ solen --rpc https://testnet-rpc.solenchain.com --chain-id 9000 \
   register-validator my-validator 500000
 ```
 
+All CLI amounts are in **SOLEN** (not base units). Decimals are supported: `100.5` = 100.5 SOLEN.
+
 This calls the staking system contract to register your account as a validator with self-stake. Your validator will be eligible for block production starting the next epoch (~100 blocks).
 
 ### 3. Run the Validator Node
