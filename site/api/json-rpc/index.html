@@ -2863,7 +2863,7 @@
 <tr>
 <td><code>0xFFFF...FF01</code></td>
 <td>Staking</td>
-<td><code>delegate</code>, <code>undelegate</code>, <code>withdraw</code>, <code>set_commission</code></td>
+<td><code>register</code>, <code>delegate</code>, <code>undelegate</code>, <code>withdraw</code>, <code>set_commission</code></td>
 </tr>
 <tr>
 <td><code>0xFFFF...FF02</code></td>
@@ -2888,6 +2888,8 @@
 </tbody>
 </table>
 <h3 id="staking-methods">Staking Methods<a class="headerlink" href="#staking-methods" title="Permanent link">&para;</a></h3>
+<p><strong><code>register</code></strong> — Register as a new validator with self-stake.
+Args: <code>amount[16 bytes LE u128]</code> (must be &gt;= 500,000 SOLEN). The sender becomes the validator.</p>
 <p><strong><code>delegate</code></strong> — Delegate tokens to a validator.
 Args: <code>validator_address[32 bytes] + amount[16 bytes LE u128]</code></p>
 <p><strong><code>undelegate</code></strong> — Begin undelegation (7-epoch cooldown).

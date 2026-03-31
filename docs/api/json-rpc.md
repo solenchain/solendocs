@@ -320,13 +320,16 @@ System contracts are invoked via `solen_submitOperation` with `Action::Call` tar
 
 | Address | Contract | Available Methods |
 |---------|----------|-------------------|
-| `0xFFFF...FF01` | Staking | `delegate`, `undelegate`, `withdraw`, `set_commission` |
+| `0xFFFF...FF01` | Staking | `register`, `delegate`, `undelegate`, `withdraw`, `set_commission` |
 | `0xFFFF...FF02` | Governance | `propose_set_base_fee`, `vote` |
 | `0xFFFF...FF03` | Bridge | `register_vault`, `deposit` |
 | `0xFFFF...FF04` | Treasury | `status` |
 | `0xFFFF...FF06` | Vesting | `claim`, `status` |
 
 ### Staking Methods
+
+**`register`** — Register as a new validator with self-stake.
+Args: `amount[16 bytes LE u128]` (must be >= 500,000 SOLEN). The sender becomes the validator.
 
 **`delegate`** — Delegate tokens to a validator.
 Args: `validator_address[32 bytes] + amount[16 bytes LE u128]`

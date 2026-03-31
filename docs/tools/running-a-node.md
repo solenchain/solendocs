@@ -86,16 +86,16 @@ solen key import my-validator <64-char-hex-seed>
 
 Your validator's account ID = public key. Fund this account with at least 500,000 SOLEN.
 
-### 2. Stake to Register
+### 2. Register as Validator
 
-Delegate your stake to your own validator address to register:
+Register with the minimum stake (500,000 SOLEN):
 
 ```bash
 solen --rpc https://testnet-rpc.solenchain.com --chain-id 9000 \
-  stake my-validator <your-validator-public-key> 500000
+  register-validator my-validator 500000
 ```
 
-Once the stake transaction is confirmed, your validator is registered and will be eligible for block production starting the next epoch (~100 blocks).
+This calls the staking system contract to register your account as a validator with self-stake. Your validator will be eligible for block production starting the next epoch (~100 blocks).
 
 ### 3. Run the Validator Node
 

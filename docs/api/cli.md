@@ -152,6 +152,18 @@ GENSIS ca93ac1705187071...        1000000              0        1000000
 
 ---
 
+### `solen register-validator <from> <amount>`
+
+Register as a new validator with self-stake. Requires minimum 500,000 SOLEN.
+
+```bash
+solen register-validator mykey 500000
+```
+
+The sender's account becomes the validator. The stake amount is deducted from the account balance. The validator is eligible for block production starting the next epoch.
+
+---
+
 ### `solen stake <from> <validator> <amount>`
 
 Delegate tokens to a validator.
