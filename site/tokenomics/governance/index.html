@@ -1993,7 +1993,7 @@
 </tr>
 <tr>
 <td>Voting period</td>
-<td>14 epochs</td>
+<td>14 days (configurable in genesis)</td>
 </tr>
 <tr>
 <td>Timelock</td>
@@ -2001,10 +2001,11 @@
 </tr>
 </tbody>
 </table>
+<p>The voting period is set per-network in the genesis config (<code>governance_voting_period</code> in epochs). Testnet uses 14 epochs (~46 min) for fast testing. Mainnet will use ~604,800 epochs (~14 days at 2s blocks).</p>
 <h2 id="proposal-lifecycle">Proposal Lifecycle<a class="headerlink" href="#proposal-lifecycle" title="Permanent link">&para;</a></h2>
 <ol>
 <li><strong>Submission</strong> — Any staked account can submit a proposal</li>
-<li><strong>Voting</strong> — Stakers vote yes/no for 14 epochs</li>
+<li><strong>Voting</strong> — Stakers vote yes/no for the voting period</li>
 <li><strong>Tallying</strong> — Quorum and supermajority thresholds checked</li>
 <li><strong>Timelock</strong> — Passed proposals wait 3 epochs before execution</li>
 <li><strong>Execution</strong> — Proposal is applied automatically</li>
