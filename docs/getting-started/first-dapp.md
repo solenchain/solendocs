@@ -43,7 +43,7 @@ The node produces blocks every 2 seconds. Leave this running.
 
 ## Step 3: Set Up Your Wallet
 
-In a second terminal, import the devnet faucet key (pre-funded with 1 billion tokens):
+In a second terminal, import the devnet faucet key (pre-funded with 10 million SOLEN):
 
 ```bash
 ./target/release/solen key import faucet \
@@ -122,8 +122,17 @@ Contract deployed successfully.
 
 ## Step 7: Initialize the Token
 
+Initialize with a name and symbol:
+
 ```bash
-./target/release/solen call faucet <TOKEN_ID> init
+# Build init args: name_len + name + symbol_len + symbol
+INIT_ARGS=$(python3 -c "
+name = b'My Token'
+symbol = b'MTK'
+print((bytes([len(name)]) + name + bytes([len(symbol)]) + symbol).hex())
+")
+
+./target/release/solen call faucet <TOKEN_ID> init --args "$INIT_ARGS"
 ```
 
 ## Step 8: Mint Tokens
@@ -225,6 +234,29 @@ rm -rf data/solen-db
 3. **Deployed a smart contract** — compiled Rust to WASM and deployed on-chain
 4. **Called contract methods** — initialized, minted, transferred tokens
 5. **Queried state** — checked balances via CLI and TypeScript SDK
+
+## Bonus: Deploy the Counter Contract
+
+For a simpler starting point, try the counter contract:
+
+```bash
+# Build
+cd examples/contracts/counter
+cargo build --target wasm32-unknown-unknown --release
+cd ../../..
+
+# Deploy
+./target/release/solen deploy faucet \
+  target/wasm32-unknown-unknown/release/solen_example_counter.wasm
+
+# Increment
+./target/release/solen call faucet <COUNTER_ID> increment
+
+# Get current value
+./target/release/solen call faucet <COUNTER_ID> get
+```
+
+The counter contract is ~20 lines of Rust — great for understanding the contract model.
 
 ## Next Steps
 

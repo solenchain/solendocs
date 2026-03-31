@@ -795,6 +795,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#bonus-deploy-the-counter-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bonus: Deploy the Counter Contract
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#next-steps" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2118,6 +2129,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#bonus-deploy-the-counter-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bonus: Deploy the Counter Contract
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#next-steps" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2179,7 +2201,7 @@
 </code></pre></div>
 <p>The node produces blocks every 2 seconds. Leave this running.</p>
 <h2 id="step-3-set-up-your-wallet">Step 3: Set Up Your Wallet<a class="headerlink" href="#step-3-set-up-your-wallet" title="Permanent link">&para;</a></h2>
-<p>In a second terminal, import the devnet faucet key (pre-funded with 1 billion tokens):</p>
+<p>In a second terminal, import the devnet faucet key (pre-funded with 10 million SOLEN):</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>./target/release/solen<span class="w"> </span>key<span class="w"> </span>import<span class="w"> </span>faucet<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span>2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a
 </code></pre></div>
@@ -2230,7 +2252,15 @@
 <p>Save the <strong>Contract ID</strong> — you'll need it for the next steps. The examples below use <code>TOKEN_ID</code> as a placeholder.</p>
 </div>
 <h2 id="step-7-initialize-the-token">Step 7: Initialize the Token<a class="headerlink" href="#step-7-initialize-the-token" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>./target/release/solen<span class="w"> </span>call<span class="w"> </span>faucet<span class="w"> </span>&lt;TOKEN_ID&gt;<span class="w"> </span>init
+<p>Initialize with a name and symbol:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># Build init args: name_len + name + symbol_len + symbol</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="nv">INIT_ARGS</span><span class="o">=</span><span class="k">$(</span>python3<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="s2">name = b&#39;My Token&#39;</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="s2">symbol = b&#39;MTK&#39;</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="s2">print((bytes([len(name)]) + name + bytes([len(symbol)]) + symbol).hex())</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="s2">&quot;</span><span class="k">)</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>./target/release/solen<span class="w"> </span>call<span class="w"> </span>faucet<span class="w"> </span>&lt;TOKEN_ID&gt;<span class="w"> </span>init<span class="w"> </span>--args<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$INIT_ARGS</span><span class="s2">&quot;</span>
 </code></pre></div>
 <h2 id="step-8-mint-tokens">Step 8: Mint Tokens<a class="headerlink" href="#step-8-mint-tokens" title="Permanent link">&para;</a></h2>
 <p>Mint 1,000,000 tokens to the faucet account:</p>
@@ -2303,6 +2333,24 @@
 <li><strong>Called contract methods</strong> — initialized, minted, transferred tokens</li>
 <li><strong>Queried state</strong> — checked balances via CLI and TypeScript SDK</li>
 </ol>
+<h2 id="bonus-deploy-the-counter-contract">Bonus: Deploy the Counter Contract<a class="headerlink" href="#bonus-deploy-the-counter-contract" title="Permanent link">&para;</a></h2>
+<p>For a simpler starting point, try the counter contract:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="c1"># Build</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="nb">cd</span><span class="w"> </span>examples/contracts/counter
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>cargo<span class="w"> </span>build<span class="w"> </span>--target<span class="w"> </span>wasm32-unknown-unknown<span class="w"> </span>--release
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="nb">cd</span><span class="w"> </span>../../..
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>
+<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="c1"># Deploy</span>
+<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a>./target/release/solen<span class="w"> </span>deploy<span class="w"> </span>faucet<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a><span class="w">  </span>target/wasm32-unknown-unknown/release/solen_example_counter.wasm
+<a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a>
+<a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a><span class="c1"># Increment</span>
+<a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a>./target/release/solen<span class="w"> </span>call<span class="w"> </span>faucet<span class="w"> </span>&lt;COUNTER_ID&gt;<span class="w"> </span>increment
+<a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a>
+<a id="__codelineno-22-13" name="__codelineno-22-13" href="#__codelineno-22-13"></a><span class="c1"># Get current value</span>
+<a id="__codelineno-22-14" name="__codelineno-22-14" href="#__codelineno-22-14"></a>./target/release/solen<span class="w"> </span>call<span class="w"> </span>faucet<span class="w"> </span>&lt;COUNTER_ID&gt;<span class="w"> </span>get
+</code></pre></div>
+<p>The counter contract is ~20 lines of Rust — great for understanding the contract model.</p>
 <h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="../../smart-contracts/contract-sdk/">Write your own contract</a> — Start from the counter example</li>

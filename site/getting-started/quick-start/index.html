@@ -2097,21 +2097,25 @@
 <thead>
 <tr>
 <th>Account</th>
+<th>Seed (hex)</th>
 <th>Balance</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>faucet</code></td>
-<td>1,000,000,000</td>
+<td><code>2a</code> repeated 32x</td>
+<td>10,000,000 SOLEN</td>
 </tr>
 <tr>
 <td><code>alice</code></td>
-<td>10,000</td>
+<td><code>0a</code> repeated 32x</td>
+<td>10,000 base units</td>
 </tr>
 <tr>
 <td><code>bob</code></td>
-<td>5,000</td>
+<td><code>0b</code> repeated 32x</td>
+<td>5,000 base units</td>
 </tr>
 </tbody>
 </table>
@@ -2175,7 +2179,8 @@
 <a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>    --validator-seed &lt;HEX&gt;     32-byte hex seed for validator key
 <a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>    --no-p2p                   Disable P2P networking
 <a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>    --in-memory                Use in-memory storage (no persistence)
-<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>    --explorer-port &lt;PORT&gt;     Explorer API port (0 to disable)
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>    --archive                  Archive mode: keep all blocks (no pruning)
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>    --explorer-port &lt;PORT&gt;     Explorer API port (0 to disable)
 </code></pre></div>
 <h2 id="multi-node-local-network">Multi-Node Local Network<a class="headerlink" href="#multi-node-local-network" title="Permanent link">&para;</a></h2>
 <p>Run multiple nodes locally by assigning different ports and data directories:</p>

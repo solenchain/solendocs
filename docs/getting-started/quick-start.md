@@ -54,11 +54,11 @@ This starts a single-validator devnet with:
 
 The node produces blocks every 2 seconds and creates three genesis accounts:
 
-| Account | Balance |
-|---------|---------|
-| `faucet` | 1,000,000,000 |
-| `alice` | 10,000 |
-| `bob` | 5,000 |
+| Account | Seed (hex) | Balance |
+|---------|------------|---------|
+| `faucet` | `2a` repeated 32x | 10,000,000 SOLEN |
+| `alice` | `0a` repeated 32x | 10,000 base units |
+| `bob` | `0b` repeated 32x | 5,000 base units |
 
 ## Network Environments
 
@@ -97,6 +97,7 @@ Options:
     --validator-seed <HEX>     32-byte hex seed for validator key
     --no-p2p                   Disable P2P networking
     --in-memory                Use in-memory storage (no persistence)
+    --archive                  Archive mode: keep all blocks (no pruning)
     --explorer-port <PORT>     Explorer API port (0 to disable)
 ```
 
