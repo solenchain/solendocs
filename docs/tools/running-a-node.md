@@ -70,6 +70,86 @@ This gives you:
     --bootstrap /ip4/127.0.0.1/tcp/50333
 ```
 
+## Becoming a Validator
+
+Validators produce blocks and earn staking rewards. You need the minimum stake of **500,000 SOLEN** to register.
+
+### 1. Generate a Validator Key
+
+```bash
+# Generate a new keypair
+solen key generate my-validator
+
+# Or import from a 32-byte hex seed
+solen key import my-validator <64-char-hex-seed>
+```
+
+Your validator's account ID = public key. Fund this account with at least 500,000 SOLEN.
+
+### 2. Stake to Register
+
+Delegate your stake to your own validator address to register:
+
+```bash
+solen --rpc https://testnet-rpc.solenchain.com --chain-id 9000 \
+  stake my-validator <your-validator-public-key> 500000
+```
+
+Once the stake transaction is confirmed, your validator is registered and will be eligible for block production starting the next epoch (~100 blocks).
+
+### 3. Run the Validator Node
+
+```bash
+solen-node \
+    --network testnet \
+    --genesis /path/to/genesis.json \
+    --data-dir /opt/solen/data/testnet \
+    --validator-seed <your-32-byte-hex-seed> \
+    --bootstrap /dns4/testnet-seed1.solenchain.com/tcp/40333 \
+    --bootstrap /dns4/testnet-seed2.solenchain.com/tcp/40333 \
+    --bootstrap /dns4/testnet-seed3.solenchain.com/tcp/40333 \
+    --bootstrap /dns4/testnet-seed4.solenchain.com/tcp/40333
+```
+
+The node will sync with the network, and once your stake is active, it will begin participating in consensus.
+
+### 4. Verify
+
+Check that your validator appears in the validator list:
+
+```bash
+solen --rpc https://testnet-rpc.solenchain.com validators
+```
+
+### Requirements
+
+| Requirement | Value |
+|-------------|-------|
+| Minimum stake | 500,000 SOLEN |
+| Unbonding period | 7 epochs |
+| Genesis validator lock | ~1 year (157,680 epochs) |
+| Default commission | 10% (1000 bps) |
+
+### Validator Operations
+
+```bash
+# Add more stake
+solen stake my-validator <validator-address> <amount>
+
+# Begin unstaking (subject to unbonding period)
+solen unstake my-validator <validator-address> <amount>
+
+# Check your validator status
+solen validators
+```
+
+### Important Notes
+
+- **Never share your validator seed.** It controls your validator identity and staked funds.
+- **Never delete the data directory** while the chain is running. Restart is fine, but wiping data requires a full resync.
+- **Keep your node online.** Extended downtime (50+ consecutive missed blocks) may result in slashing.
+- Your validator earns epoch rewards proportional to its stake. Default commission is 10% on delegator rewards.
+
 ## Production Deployment
 
 For production or testnet deployment, see [Testnet Deployment](testnet-deployment.md).
