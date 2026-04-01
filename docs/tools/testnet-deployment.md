@@ -24,8 +24,8 @@ The testnet deployment in `deploy/testnet/` sets up a 4-validator network:
 
 | Network | RPC | API | Seed Node |
 |---------|-----|-----|-----------|
-| Mainnet | `rpc.solenchain.com` | `api.solenchain.com` | `seed1.solenchain.com` |
-| Testnet | `testnet-rpc.solenchain.com` | `testnet-api.solenchain.com` | `testnet-seed1.solenchain.com` |
+| Mainnet | `rpc.solenchain.io` | `api.solenchain.io` | `seed1.solenchain.io` |
+| Testnet | `testnet-rpc.solenchain.io` | `testnet-api.solenchain.io` | `testnet-seed1.solenchain.io` |
 
 ## Setup
 
@@ -66,7 +66,7 @@ The faucet runs as an HTTP service for distributing testnet tokens:
 
 ```bash
 # Request tokens
-curl -X POST http://testnet-faucet.solenchain.com/drip \
+curl -X POST http://testnet-faucet.solenchain.io/drip \
   -H "Content-Type: application/json" \
   -d '{"account": "your-account-id-hex"}'
 ```

@@ -148,7 +148,7 @@ curl -s -X POST http://127.0.0.1:29944 \
 Contract deployers can publish source code for verification on the explorer:
 
 ```bash
-curl -X POST https://testnet-api.solenchain.com/api/contracts/<CODE_HASH>/source \
+curl -X POST https://testnet-api.solenchain.io/api/contracts/<CODE_HASH>/source \
   -H "Content-Type: application/json" \
   -d '{"code_hash":"<CODE_HASH>","source_code":"<RUST_SOURCE>","language":"rust","compiler_version":"1.78.0"}'
 ```

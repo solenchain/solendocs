@@ -54,7 +54,7 @@ Solen narrows the responsibilities of the base layer and treats execution domain
 |---------|-------------|
 | [Solen](https://github.com/solenchain/solen) | Core blockchain node, runtime, and tools |
 | [SolenScan](https://github.com/solenchain/solenscan) | Block explorer web application |
-| [Solen Website](https://solenchain.com) | Project landing page |
+| [Solen Website](https://solenchain.io) | Project landing page |
 
 ---
 

@@ -91,7 +91,7 @@ Your validator's account ID = public key. Fund this account with at least 500,00
 Register with the minimum stake (500,000 SOLEN):
 
 ```bash
-solen --rpc https://testnet-rpc.solenchain.com --chain-id 9000 \
+solen --rpc https://testnet-rpc.solenchain.io --chain-id 9000 \
   register-validator my-validator 500000
 ```
 
@@ -107,10 +107,10 @@ solen-node \
     --genesis /path/to/genesis.json \
     --data-dir /opt/solen/data/testnet \
     --validator-seed <your-32-byte-hex-seed> \
-    --bootstrap /dns4/testnet-seed1.solenchain.com/tcp/40333 \
-    --bootstrap /dns4/testnet-seed2.solenchain.com/tcp/40333 \
-    --bootstrap /dns4/testnet-seed3.solenchain.com/tcp/40333 \
-    --bootstrap /dns4/testnet-seed4.solenchain.com/tcp/40333
+    --bootstrap /dns4/testnet-seed1.solenchain.io/tcp/40333 \
+    --bootstrap /dns4/testnet-seed2.solenchain.io/tcp/40333 \
+    --bootstrap /dns4/testnet-seed3.solenchain.io/tcp/40333 \
+    --bootstrap /dns4/testnet-seed4.solenchain.io/tcp/40333
 ```
 
 The node will sync with the network, and once your stake is active, it will begin participating in consensus.
@@ -120,7 +120,7 @@ The node will sync with the network, and once your stake is active, it will begi
 Check that your validator appears in the validator list:
 
 ```bash
-solen --rpc https://testnet-rpc.solenchain.com validators
+solen --rpc https://testnet-rpc.solenchain.io validators
 ```
 
 ### Requirements
