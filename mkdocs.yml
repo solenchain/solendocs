@@ -1,8 +1,8 @@
 site_name: Solen Documentation
 site_description: Documentation for Solen — a modular settlement network with native rollups, smart accounts, and intent-aware execution.
 site_url: https://docs.solenchain.io
-repo_url: https://github.com/solenchain/solen
-repo_name: solenchain/solen
+repo_url: https://github.com/Solen-Blockchain/solen
+repo_name: Solen-Blockchain/solen
 
 theme:
   name: material
@@ -106,7 +106,7 @@ nav:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/solenchain/solen
+      link: https://github.com/Solen-Blockchain/solen
     - icon: fontawesome/brands/x-twitter
       link: https://x.com/solenchain
     - icon: fontawesome/brands/discord
