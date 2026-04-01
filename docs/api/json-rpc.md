@@ -446,6 +446,7 @@ System contracts are invoked via `solen_submitOperation` with `Action::Call` tar
 | `0xFFFF...FF04` | Treasury | `status` |
 | `0xFFFF...FF06` | Vesting | `claim`, `status` |
 | `0xFFFF...FF07` | Paymaster Registry | `register`, `unregister`, `list` |
+| `0xFFFF...FF08` | Guardian Recovery | `initiate_recovery`, `confirm_recovery`, `cancel_recovery`, `execute_recovery` |
 
 ### Staking Methods
 
@@ -536,6 +537,48 @@ Paymaster contracts must implement a `willSponsor` method that:
 - Returns `[1]` (1 byte) to accept, or `[1, max_gas[16 bytes LE]]` to accept with a gas limit
 - Returns `[0]` or empty to reject
 
+### Guardian Recovery Methods
+
+Social recovery for lost keys. Users add `Guardian` auth methods to their account, designating trusted accounts that can collectively recover access.
+
+**Setup:** Use `SetAuth` action to add guardians to your account:
+```json
+{
+  "type": "SetAuth",
+  "auth_methods": [
+    { "Ed25519": { "public_key": "your-key-hex" } },
+    { "Guardian": { "guardian_id": "guardian-1-hex" } },
+    { "Guardian": { "guardian_id": "guardian-2-hex" } },
+    { "Guardian": { "guardian_id": "guardian-3-hex" } }
+  ]
+}
+```
+
+**`initiate_recovery`** — A guardian initiates recovery for a target account.
+Args: `target_account[32] + new_auth_methods_json[...]`
+Starts a 1-week timelock (151,200 blocks at 4s block time). The initiating guardian auto-confirms.
+
+**`confirm_recovery`** — Another guardian confirms a pending recovery.
+Args: `recovery_id[8 bytes LE]`
+Requires majority of guardians (minimum 2) to confirm.
+
+**`cancel_recovery`** — The account owner cancels an unauthorized recovery.
+Args: `recovery_id[8 bytes LE]`
+Only the target account owner can cancel. Can be called any time before execution.
+
+**`execute_recovery`** — Execute recovery after timelock expires and enough confirmations.
+Args: `recovery_id[8 bytes LE]`
+Anyone can call this. Replaces the target account's auth methods with the new ones.
+
+**Recovery flow:**
+1. Owner loses key
+2. Guardian A calls `initiate_recovery` with new key → auto-confirms, starts 1-week timelock
+3. Guardian B calls `confirm_recovery` → threshold reached (2 of 3)
+4. After 1 week, anyone calls `execute_recovery` → account auth methods replaced
+5. Owner regains access with new key
+
+If the recovery is unauthorized, the real owner can call `cancel_recovery` during the 1-week window.
+
 ---
 
 ## CLI Commands
@@ -572,6 +615,12 @@ solen-cli register-rollup <from> <rollup-id> <name> [--proof-type mock] [--genes
 # Paymasters
 solen-cli register-paymaster <from>
 solen-cli unregister-paymaster <from>
+
+# Guardian recovery
+solen-cli initiate-recovery <from> <target> <new-public-key>
+solen-cli confirm-recovery <from> <recovery-id>
+solen-cli cancel-recovery <from> <recovery-id>
+solen-cli execute-recovery <from> <recovery-id>
 
 # Key management
 solen-cli key generate <name>
