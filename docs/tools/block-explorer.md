@@ -2,7 +2,7 @@
 
 SolenScan is a web-based block explorer for the Solen blockchain, built with Next.js 15, React 19, and TypeScript.
 
-**Repository:** [solenscan](https://github.com/solenchain/solenscan)
+**Repository:** [solenscan](https://github.com/Solen-Blockchain/solenscan)
 
 ## Features
 
