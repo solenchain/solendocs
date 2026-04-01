@@ -8,6 +8,7 @@ Token holders participate in on-chain governance by voting with their staked tok
 |-----------|-------|
 | Quorum | 30% of staked supply must participate |
 | Pass threshold | 66.67% supermajority |
+| Proposal deposit | 1,000 SOLEN (returned if passed, sent to treasury if rejected) |
 | Voting period | 14 days (configurable in genesis) |
 | Timelock | 3 epochs after passing before execution |
 
