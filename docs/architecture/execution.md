@@ -64,5 +64,7 @@ Genesis initialization creates the initial state:
 
 | Benchmark | TPS |
 |-----------|-----|
-| Transfers | ~14,000 |
-| Contract calls | ~10,000 |
+| Transfers (authenticated) | ~15,000 |
+| Contract calls (WASM) | ~10,000 |
+
+All numbers include full Ed25519 signature verification on every operation.
