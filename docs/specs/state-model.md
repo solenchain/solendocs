@@ -10,14 +10,20 @@ The Solen L1 maintains these core state objects:
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `account_id` | `[u8; 32]` | Unique account identifier |
-| `code_hash` | `Option<Hash>` | WASM contract code hash (if deployed) |
-| `owners` | `Vec<PublicKey>` | Authorized signing keys |
-| `threshold` | `u8` | Required signatures for M-of-N |
-| `guardians` | `Vec<AccountId>` | Recovery accounts |
+| `id` | `[u8; 32]` | Unique account identifier (Ed25519 public key) |
+| `code_hash` | `[u8; 32]` | WASM contract code hash (zero if no contract deployed) |
+| `auth_methods` | `Vec<AuthMethod>` | Authorized signing/recovery methods (see below) |
 | `nonce` | `u64` | Operation counter (replay protection) |
-| `spending_policies` | `Vec<Policy>` | Spending limits and restrictions |
-| `session_keys` | `Vec<SessionKey>` | Temporary authorized keys |
+| `balance` | `u128` | Native token balance (base units, 8 decimals) |
+
+**AuthMethod variants:**
+
+| Variant | Fields | Description |
+|---------|--------|-------------|
+| `Ed25519` | `public_key: [u8; 32]` | Standard Ed25519 signing key |
+| `Threshold` | `signers: Vec<[u8; 32]>, threshold: u16` | M-of-N multi-sig |
+| `Guardian` | `guardian_id: [u8; 32]` | Social recovery guardian (must be existing account) |
+| `Passkey` | `credential_id: Vec<u8>` | WebAuthn passkey (planned) |
 
 ### Validator
 

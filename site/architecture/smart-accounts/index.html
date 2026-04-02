@@ -2214,6 +2214,33 @@
 </ul>
 <h3 id="guardians">Guardians<a class="headerlink" href="#guardians" title="Permanent link">&para;</a></h3>
 <p>Trusted accounts that can help recover access if primary keys are lost. Social recovery enables account recovery without seed phrases.</p>
+<p><strong>Setup:</strong> Add <code>Guardian</code> auth methods alongside your primary key using <code>SetAuth</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">{</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">&quot;auth_methods&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;Ed25519&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;public_key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;your-key&quot;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;Guardian&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;guardian_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;friend-1&quot;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;Guardian&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;guardian_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;friend-2&quot;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;Guardian&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;guardian_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;friend-3&quot;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">  </span><span class="p">]</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="p">}</span>
+</code></pre></div>
+<p>Guardian accounts must exist on-chain at the time of setup (validated during <code>SetAuth</code>).</p>
+<p><strong>Recovery process:</strong></p>
+<ol>
+<li>A guardian calls <code>initiate_recovery</code> on the Guardian system contract (<code>0xFFFF...FF08</code>) with the target account and new auth methods</li>
+<li>The guardian list is <strong>captured at initiation time</strong> — subsequent changes to the account's guardians don't affect an in-progress recovery</li>
+<li>Other guardians call <code>confirm_recovery</code> — a majority (minimum 2) must confirm</li>
+<li>A <strong>1-week timelock</strong> (151,200 blocks at 4s block time) must pass before execution</li>
+<li>During the timelock, the account owner can call <code>cancel_recovery</code> to block unauthorized attempts</li>
+<li>After timelock + confirmations, anyone can call <code>execute_recovery</code> to replace the account's auth methods</li>
+</ol>
+<p><strong>Security properties:</strong></p>
+<ul>
+<li>No single guardian can recover alone (majority required, minimum 2)</li>
+<li>Account owner can always cancel during the timelock window</li>
+<li>Guardian list is frozen at initiation — changing guardians mid-recovery doesn't affect the outcome</li>
+<li>Guardians never get access to funds — they can only change auth methods</li>
+</ul>
 <h3 id="session-credentials">Session Credentials<a class="headerlink" href="#session-credentials" title="Permanent link">&para;</a></h3>
 <p>Temporary keys with:</p>
 <ul>

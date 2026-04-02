@@ -95,6 +95,37 @@ To convert back to a standard Ed25519 account, submit a `SetAuth` action signed 
 
 Trusted accounts that can help recover access if primary keys are lost. Social recovery enables account recovery without seed phrases.
 
+**Setup:** Add `Guardian` auth methods alongside your primary key using `SetAuth`:
+
+```json
+{
+  "auth_methods": [
+    { "Ed25519": { "public_key": "your-key" } },
+    { "Guardian": { "guardian_id": "friend-1" } },
+    { "Guardian": { "guardian_id": "friend-2" } },
+    { "Guardian": { "guardian_id": "friend-3" } }
+  ]
+}
+```
+
+Guardian accounts must exist on-chain at the time of setup (validated during `SetAuth`).
+
+**Recovery process:**
+
+1. A guardian calls `initiate_recovery` on the Guardian system contract (`0xFFFF...FF08`) with the target account and new auth methods
+2. The guardian list is **captured at initiation time** — subsequent changes to the account's guardians don't affect an in-progress recovery
+3. Other guardians call `confirm_recovery` — a majority (minimum 2) must confirm
+4. A **1-week timelock** (151,200 blocks at 4s block time) must pass before execution
+5. During the timelock, the account owner can call `cancel_recovery` to block unauthorized attempts
+6. After timelock + confirmations, anyone can call `execute_recovery` to replace the account's auth methods
+
+**Security properties:**
+
+- No single guardian can recover alone (majority required, minimum 2)
+- Account owner can always cancel during the timelock window
+- Guardian list is frozen at initiation — changing guardians mid-recovery doesn't affect the outcome
+- Guardians never get access to funds — they can only change auth methods
+
 ### Session Credentials
 
 Temporary keys with:

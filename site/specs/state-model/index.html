@@ -1999,29 +1999,19 @@
 </thead>
 <tbody>
 <tr>
-<td><code>account_id</code></td>
+<td><code>id</code></td>
 <td><code>[u8; 32]</code></td>
-<td>Unique account identifier</td>
+<td>Unique account identifier (Ed25519 public key)</td>
 </tr>
 <tr>
 <td><code>code_hash</code></td>
-<td><code>Option&lt;Hash&gt;</code></td>
-<td>WASM contract code hash (if deployed)</td>
+<td><code>[u8; 32]</code></td>
+<td>WASM contract code hash (zero if no contract deployed)</td>
 </tr>
 <tr>
-<td><code>owners</code></td>
-<td><code>Vec&lt;PublicKey&gt;</code></td>
-<td>Authorized signing keys</td>
-</tr>
-<tr>
-<td><code>threshold</code></td>
-<td><code>u8</code></td>
-<td>Required signatures for M-of-N</td>
-</tr>
-<tr>
-<td><code>guardians</code></td>
-<td><code>Vec&lt;AccountId&gt;</code></td>
-<td>Recovery accounts</td>
+<td><code>auth_methods</code></td>
+<td><code>Vec&lt;AuthMethod&gt;</code></td>
+<td>Authorized signing/recovery methods (see below)</td>
 </tr>
 <tr>
 <td><code>nonce</code></td>
@@ -2029,14 +2019,41 @@
 <td>Operation counter (replay protection)</td>
 </tr>
 <tr>
-<td><code>spending_policies</code></td>
-<td><code>Vec&lt;Policy&gt;</code></td>
-<td>Spending limits and restrictions</td>
+<td><code>balance</code></td>
+<td><code>u128</code></td>
+<td>Native token balance (base units, 8 decimals)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>AuthMethod variants:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variant</th>
+<th>Fields</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Ed25519</code></td>
+<td><code>public_key: [u8; 32]</code></td>
+<td>Standard Ed25519 signing key</td>
 </tr>
 <tr>
-<td><code>session_keys</code></td>
-<td><code>Vec&lt;SessionKey&gt;</code></td>
-<td>Temporary authorized keys</td>
+<td><code>Threshold</code></td>
+<td><code>signers: Vec&lt;[u8; 32]&gt;, threshold: u16</code></td>
+<td>M-of-N multi-sig</td>
+</tr>
+<tr>
+<td><code>Guardian</code></td>
+<td><code>guardian_id: [u8; 32]</code></td>
+<td>Social recovery guardian (must be existing account)</td>
+</tr>
+<tr>
+<td><code>Passkey</code></td>
+<td><code>credential_id: Vec&lt;u8&gt;</code></td>
+<td>WebAuthn passkey (planned)</td>
 </tr>
 </tbody>
 </table>
