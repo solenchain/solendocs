@@ -126,15 +126,70 @@ Guardian accounts must exist on-chain at the time of setup (validated during `Se
 - Guardian list is frozen at initiation — changing guardians mid-recovery doesn't affect the outcome
 - Guardians never get access to funds — they can only change auth methods
 
+### Passkeys (WebAuthn)
+
+Hardware-backed authentication using platform biometrics (Face ID, Touch ID, Windows Hello). No seed phrases needed.
+
+**How it works:**
+
+- Uses P-256 (secp256r1) ECDSA — the standard WebAuthn algorithm
+- The public key coordinates (x, y) are stored on-chain alongside the credential ID
+- Each transaction's signing message is embedded as the WebAuthn challenge
+- Signature includes authenticatorData + clientDataJSON + ECDSA (r, s)
+
+**Setup:** Use `SetAuth` to add a passkey:
+
+```json
+{
+  "auth_methods": [
+    {
+      "Passkey": {
+        "credential_id": [/* bytes */],
+        "public_key_x": [/* 32 bytes */],
+        "public_key_y": [/* 32 bytes */]
+      }
+    }
+  ]
+}
+```
+
+**Verification checks:**
+
+- Challenge in clientDataJSON matches base64url(signing_message)
+- User Present (UP) flag is set in authenticatorData
+- P-256 ECDSA signature is valid over authenticatorData || SHA-256(clientDataJSON)
+
 ### Session Credentials
 
 Temporary keys with:
 
-- **Time limits** — Auto-expire after a set duration
-- **Spending limits** — Cap the total value of operations
+- **Time limits** — Auto-expire after a set block height
+- **Spending limits** — Cap the total value of transfers per operation
+- **Target restrictions** — Limit which contracts can be called
 - **Method restrictions** — Limit which contract methods can be called
 
 Useful for dApp sessions where users grant limited permissions without exposing their primary keys.
+
+**Setup:** Use `SetAuth` to add a session key alongside your primary key:
+
+```json
+{
+  "auth_methods": [
+    { "Ed25519": { "public_key": "primary-key" } },
+    {
+      "Session": {
+        "session_key": "temp-ed25519-key",
+        "expires_at": 100000,
+        "spending_limit": 1000000000000,
+        "allowed_targets": ["contract-id"],
+        "allowed_methods": ["transfer", "swap"]
+      }
+    }
+  ]
+}
+```
+
+Session keys use standard Ed25519 signatures. The executor validates restrictions at execution time — expired sessions are rejected, spending over the limit fails, and calls to unauthorized targets/methods are blocked.
 
 ## Programmable Policies
 

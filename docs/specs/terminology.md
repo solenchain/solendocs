@@ -16,6 +16,8 @@
 | **Solver** | An off-chain agent that competes to fulfill user intents with optimal execution. |
 | **Paymaster** | An account that sponsors transaction fees on behalf of other accounts, enabling gasless UX. |
 | **Guardian** | A trusted account designated for social recovery. Guardians can collectively authorize replacing an account's auth methods after a 1-week timelock. |
+| **Passkey** | A WebAuthn credential using P-256 (secp256r1) ECDSA for hardware-backed authentication via biometrics. No seed phrases. |
+| **Session Key** | A temporary Ed25519 key with restrictions (expiry, spending limits, target/method restrictions) for dApp sessions. |
 | **Bridge Vault** | An L1 contract that holds assets locked for cross-domain transfers between L1 and rollups. |
 | **Slashing** | Penalty applied to validators (and their delegators) for misbehavior such as double signing or downtime. |
 | **Unbonding** | The cooldown period after unstaking, during which tokens cannot be transferred but are still subject to slashing. |
