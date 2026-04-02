@@ -174,10 +174,59 @@ solen stake mykey 8a88e3dd7409f195fd52db2d3cba5d72ca6709bf1d94121bf3748801b40f6f
 
 ### `solen unstake <from> <validator> <amount>`
 
-Begin undelegation from a validator. Funds are available after the unbonding period (7 epochs).
+Begin undelegation from a validator. Automatically withdraws any previously matured undelegations. New unstaked funds are available after the unbonding period (7 epochs).
 
 ```bash
 solen unstake mykey 8a88e3dd7409f195fd52db2d3cba5d72ca6709bf1d94121bf3748801b40f6f5c 5000
+```
+
+---
+
+### `solen withdraw-stake <from>`
+
+Withdraw all matured unstaked tokens. Tokens that have passed the 7-epoch unbonding period are credited to your balance.
+
+```bash
+solen withdraw-stake mykey
+```
+
+---
+
+### `solen register-rollup <from> <rollup-id> <name> [--proof-type <type>]`
+
+Register a rollup domain on L1. Requires a 10,000 SOLEN deposit.
+
+```bash
+solen register-rollup mykey 1 "My Rollup" --proof-type mock
+```
+
+---
+
+### `solen key lock`
+
+Encrypt all keys in the local keystore with a password (Argon2id + AES-256-GCM).
+
+```bash
+solen key lock
+# Prompts for new password (min 8 chars) + confirmation
+```
+
+### `solen key unlock`
+
+Decrypt all keys, removing password protection.
+
+```bash
+solen key unlock
+# Prompts for current password
+```
+
+### `solen key change-password`
+
+Change the keystore password.
+
+```bash
+solen key change-password
+# Prompts for current password, then new password + confirmation
 ```
 
 ---

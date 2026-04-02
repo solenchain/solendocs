@@ -345,6 +345,53 @@ curl -s -X POST http://127.0.0.1:29944 \
 
 ---
 
+### `solen_getPendingIntents`
+
+Get pending intents available for solvers.
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `limit` | `u64?` | Maximum number of intents to return (default: 50) |
+
+**Returns:** Array of intent objects with `id`, `sender`, `constraints`, `max_fee`, `expiry_height`, `tip`, `status`.
+
+---
+
+### `solen_submitSolution`
+
+Submit a solver's solution for an intent.
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `intent_id` | `u64` | ID of the intent to solve |
+| `solver` | `string` | Hex-encoded solver account ID |
+| `operations` | `array` | Array of `UserOperation` objects |
+| `claimed_tip` | `string` | Tip amount claimed by solver |
+| `score` | `u64` | Solver-reported quality score |
+
+**Returns:** `{ accepted: bool, error: string? }`
+
+---
+
+### `solen_getRollupBatches`
+
+Get verified batch history for a rollup.
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `rollup_id` | `u64` | Rollup domain identifier |
+| `limit` | `u64?` | Maximum batches to return (default: 50) |
+
+**Returns:** Array of `{ rollup_id, batch_index, state_root, data_hash, pre_state_root }`.
+
+---
+
 ### `solen_submitIntent`
 
 Submit a signed intent for solver resolution.
@@ -456,11 +503,11 @@ Args: `amount[16 bytes LE u128]` (must be >= 500,000 SOLEN). The sender becomes 
 **`delegate`** — Delegate tokens to a validator.
 Args: `validator_address[32 bytes] + amount[16 bytes LE u128]`
 
-**`undelegate`** — Begin undelegation (7-epoch cooldown).
-Args: `validator_address[32 bytes] + amount[16 bytes LE] + epoch[8 bytes LE]`
+**`undelegate`** — Begin undelegation (7-epoch cooldown). Automatically withdraws any previously matured undelegations.
+Args: `validator_address[32 bytes] + amount[16 bytes LE]`
 
-**`withdraw`** — Withdraw completed undelegations.
-Args: `current_epoch[8 bytes LE]`
+**`withdraw`** — Withdraw all matured undelegations. Epoch is read from chain state automatically.
+Args: none
 
 **`set_commission`** — Set validator commission rate (validator only).
 Args: `commission_bps[8 bytes LE]` (e.g., 1000 = 10%, max 10000 = 100%)
@@ -598,6 +645,7 @@ solen-cli transfer <from> <to> <amount>
 solen-cli register-validator <from> <amount>
 solen-cli stake <from> <validator> <amount>
 solen-cli unstake <from> <validator> <amount>
+solen-cli withdraw-stake <from>
 
 # Governance
 solen-cli propose-block-time <from> <ms> <description>

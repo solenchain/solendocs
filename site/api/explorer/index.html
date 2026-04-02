@@ -1347,6 +1347,50 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#get-apirollups" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /api/rollups
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-apirollupsrollup_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /api/rollups/:rollup_id
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-apirollupsrollup_idbatches" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /api/rollups/:rollup_id/batches
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-apiintents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /api/intents
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2190,6 +2234,50 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#get-apirollups" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /api/rollups
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-apirollupsrollup_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /api/rollups/:rollup_id
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-apirollupsrollup_idbatches" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /api/rollups/:rollup_id/batches
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-apiintents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /api/intents
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2563,6 +2651,57 @@
 <a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="p">}</span>
 </code></pre></div>
 <p>Returns <code>null</code> if no source has been published.</p>
+<hr />
+<h3 id="get-apirollups"><code>GET /api/rollups</code><a class="headerlink" href="#get-apirollups" title="Permanent link">&para;</a></h3>
+<p>List all registered rollup domains.</p>
+<p><strong>Response:</strong> Array of rollup objects:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="p">[</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">  </span><span class="p">{</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">    </span><span class="nt">&quot;rollup_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Solen Test Rollup&quot;</span><span class="p">,</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">    </span><span class="nt">&quot;proof_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mock&quot;</span><span class="p">,</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="w">    </span><span class="nt">&quot;sequencer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;43a72e71...&quot;</span><span class="p">,</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="w">    </span><span class="nt">&quot;genesis_state_root&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="w">    </span><span class="nt">&quot;registered_at_height&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">34200</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="p">]</span>
+</code></pre></div>
+<hr />
+<h3 id="get-apirollupsrollup_id"><code>GET /api/rollups/:rollup_id</code><a class="headerlink" href="#get-apirollupsrollup_id" title="Permanent link">&para;</a></h3>
+<p>Get rollup detail including batch count and latest batch.</p>
+<p><strong>Response:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="p">{</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span><span class="nt">&quot;rollup_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Solen Test Rollup&quot;</span><span class="p">,</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">  </span><span class="nt">&quot;proof_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mock&quot;</span><span class="p">,</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="w">  </span><span class="nt">&quot;sequencer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;43a72e71...&quot;</span><span class="p">,</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="w">  </span><span class="nt">&quot;registered_at_height&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">34200</span><span class="p">,</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="w">  </span><span class="nt">&quot;total_batches&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="w">  </span><span class="nt">&quot;latest_batch&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;batch_index&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;state_root&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;f6c344...&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;verified&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="p">}</span>
+</code></pre></div>
+<hr />
+<h3 id="get-apirollupsrollup_idbatches"><code>GET /api/rollups/:rollup_id/batches</code><a class="headerlink" href="#get-apirollupsrollup_idbatches" title="Permanent link">&para;</a></h3>
+<p>Get verified batch history for a rollup.</p>
+<p><strong>Response:</strong> Array of batch objects with <code>rollup_id</code>, <code>batch_index</code>, <code>state_root</code>, <code>data_hash</code>, <code>verified</code>, <code>block_height</code>.</p>
+<hr />
+<h3 id="get-apiintents"><code>GET /api/intents</code><a class="headerlink" href="#get-apiintents" title="Permanent link">&para;</a></h3>
+<p>Get recently fulfilled intents.</p>
+<p><strong>Query parameters:</strong> <code>limit</code> (default 20)</p>
+<p><strong>Response:</strong> Array of intent objects:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="p">[</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">  </span><span class="p">{</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">    </span><span class="nt">&quot;intent_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">    </span><span class="nt">&quot;sender&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;43a72e71...&quot;</span><span class="p">,</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="w">    </span><span class="nt">&quot;block_height&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">36316</span><span class="p">,</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="w">    </span><span class="nt">&quot;tx_index&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="w">    </span><span class="nt">&quot;transfer_to&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;094c8cce...&quot;</span><span class="p">,</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="w">    </span><span class="nt">&quot;transfer_amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10000000000&quot;</span><span class="p">,</span>
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="w">    </span><span class="nt">&quot;solver_tip&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;100000000&quot;</span><span class="p">,</span>
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="w">    </span><span class="nt">&quot;solver&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;8a88e3dd...&quot;</span>
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a><span class="p">]</span>
+</code></pre></div>
 <hr />
 <h2 id="pagination">Pagination<a class="headerlink" href="#pagination" title="Permanent link">&para;</a></h2>
 <p>All list endpoints (<code>/api/blocks</code>, <code>/api/txs</code>, <code>/api/events</code>, <code>/api/accounts/:id/txs</code>) support pagination:</p>

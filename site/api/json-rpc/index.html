@@ -1298,6 +1298,39 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#solen_getpendingintents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        solen_getPendingIntents
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solen_submitsolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        solen_submitSolution
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solen_getrollupbatches" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        solen_getRollupBatches
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#solen_submitintent" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2296,6 +2329,39 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#solen_getpendingintents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        solen_getPendingIntents
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solen_submitsolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        solen_submitSolution
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solen_getrollupbatches" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        solen_getRollupBatches
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#solen_submitintent" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3096,6 +3162,94 @@
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;method&quot;:&quot;solen_getVestingInfo&quot;,&quot;params&quot;:[&quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot;],&quot;id&quot;:1}&#39;</span>
 </code></pre></div>
 <hr />
+<h3 id="solen_getpendingintents"><code>solen_getPendingIntents</code><a class="headerlink" href="#solen_getpendingintents" title="Permanent link">&para;</a></h3>
+<p>Get pending intents available for solvers.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>limit</code></td>
+<td><code>u64?</code></td>
+<td>Maximum number of intents to return (default: 50)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> Array of intent objects with <code>id</code>, <code>sender</code>, <code>constraints</code>, <code>max_fee</code>, <code>expiry_height</code>, <code>tip</code>, <code>status</code>.</p>
+<hr />
+<h3 id="solen_submitsolution"><code>solen_submitSolution</code><a class="headerlink" href="#solen_submitsolution" title="Permanent link">&para;</a></h3>
+<p>Submit a solver's solution for an intent.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>intent_id</code></td>
+<td><code>u64</code></td>
+<td>ID of the intent to solve</td>
+</tr>
+<tr>
+<td><code>solver</code></td>
+<td><code>string</code></td>
+<td>Hex-encoded solver account ID</td>
+</tr>
+<tr>
+<td><code>operations</code></td>
+<td><code>array</code></td>
+<td>Array of <code>UserOperation</code> objects</td>
+</tr>
+<tr>
+<td><code>claimed_tip</code></td>
+<td><code>string</code></td>
+<td>Tip amount claimed by solver</td>
+</tr>
+<tr>
+<td><code>score</code></td>
+<td><code>u64</code></td>
+<td>Solver-reported quality score</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <code>{ accepted: bool, error: string? }</code></p>
+<hr />
+<h3 id="solen_getrollupbatches"><code>solen_getRollupBatches</code><a class="headerlink" href="#solen_getrollupbatches" title="Permanent link">&para;</a></h3>
+<p>Get verified batch history for a rollup.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>rollup_id</code></td>
+<td><code>u64</code></td>
+<td>Rollup domain identifier</td>
+</tr>
+<tr>
+<td><code>limit</code></td>
+<td><code>u64?</code></td>
+<td>Maximum batches to return (default: 50)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> Array of <code>{ rollup_id, batch_index, state_root, data_hash, pre_state_root }</code>.</p>
+<hr />
 <h3 id="solen_submitintent"><code>solen_submitIntent</code><a class="headerlink" href="#solen_submitintent" title="Permanent link">&para;</a></h3>
 <p>Submit a signed intent for solver resolution.</p>
 <p><strong>Parameters:</strong></p>
@@ -3371,10 +3525,10 @@
 Args: <code>amount[16 bytes LE u128]</code> (must be &gt;= 500,000 SOLEN). The sender becomes the validator.</p>
 <p><strong><code>delegate</code></strong> — Delegate tokens to a validator.
 Args: <code>validator_address[32 bytes] + amount[16 bytes LE u128]</code></p>
-<p><strong><code>undelegate</code></strong> — Begin undelegation (7-epoch cooldown).
-Args: <code>validator_address[32 bytes] + amount[16 bytes LE] + epoch[8 bytes LE]</code></p>
-<p><strong><code>withdraw</code></strong> — Withdraw completed undelegations.
-Args: <code>current_epoch[8 bytes LE]</code></p>
+<p><strong><code>undelegate</code></strong> — Begin undelegation (7-epoch cooldown). Automatically withdraws any previously matured undelegations.
+Args: <code>validator_address[32 bytes] + amount[16 bytes LE]</code></p>
+<p><strong><code>withdraw</code></strong> — Withdraw all matured undelegations. Epoch is read from chain state automatically.
+Args: none</p>
 <p><strong><code>set_commission</code></strong> — Set validator commission rate (validator only).
 Args: <code>commission_bps[8 bytes LE]</code> (e.g., 1000 = 10%, max 10000 = 100%)</p>
 <h3 id="reward-distribution">Reward Distribution<a class="headerlink" href="#reward-distribution" title="Permanent link">&para;</a></h3>
@@ -3504,34 +3658,35 @@ Anyone can call this. Replaces the target account's auth methods with the new on
 <a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>solen-cli<span class="w"> </span>register-validator<span class="w"> </span>&lt;from&gt;<span class="w"> </span>&lt;amount&gt;
 <a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>solen-cli<span class="w"> </span>stake<span class="w"> </span>&lt;from&gt;<span class="w"> </span>&lt;validator&gt;<span class="w"> </span>&lt;amount&gt;
 <a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>solen-cli<span class="w"> </span>unstake<span class="w"> </span>&lt;from&gt;<span class="w"> </span>&lt;validator&gt;<span class="w"> </span>&lt;amount&gt;
-<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>
-<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a><span class="c1"># Governance</span>
-<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>solen-cli<span class="w"> </span>propose-block-time<span class="w"> </span>&lt;from&gt;<span class="w"> </span>&lt;ms&gt;<span class="w"> </span>&lt;description&gt;
-<a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a>solen-cli<span class="w"> </span>vote<span class="w"> </span>&lt;from&gt;<span class="w"> </span>&lt;proposal-id&gt;<span class="w"> </span>--yes<span class="w"> </span>&lt;weight&gt;
-<a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a>solen-cli<span class="w"> </span>finalize-proposal<span class="w"> </span>&lt;from&gt;<span class="w"> </span>&lt;proposal-id&gt;
-<a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a>solen-cli<span class="w"> </span>execute-proposal<span class="w"> </span>&lt;from&gt;<span class="w"> </span>&lt;proposal-id&gt;
-<a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a>
-<a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a><span class="c1"># Contracts</span>
-<a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a>solen-cli<span class="w"> </span>deploy<span class="w"> </span>&lt;from&gt;<span class="w"> </span>&lt;wasm-file&gt;
-<a id="__codelineno-13-22" name="__codelineno-13-22" href="#__codelineno-13-22"></a>solen-cli<span class="w"> </span>call<span class="w"> </span>&lt;from&gt;<span class="w"> </span>&lt;target&gt;<span class="w"> </span>&lt;method&gt;<span class="w"> </span><span class="o">[</span>--args<span class="w"> </span>&lt;hex&gt;<span class="o">]</span>
-<a id="__codelineno-13-23" name="__codelineno-13-23" href="#__codelineno-13-23"></a>
-<a id="__codelineno-13-24" name="__codelineno-13-24" href="#__codelineno-13-24"></a><span class="c1"># Rollups</span>
-<a id="__codelineno-13-25" name="__codelineno-13-25" href="#__codelineno-13-25"></a>solen-cli<span class="w"> </span>register-rollup<span class="w"> </span>&lt;from&gt;<span class="w"> </span>&lt;rollup-id&gt;<span class="w"> </span>&lt;name&gt;<span class="w"> </span><span class="o">[</span>--proof-type<span class="w"> </span>mock<span class="o">]</span><span class="w"> </span><span class="o">[</span>--genesis-state-root<span class="w"> </span>&lt;hex&gt;<span class="o">]</span>
-<a id="__codelineno-13-26" name="__codelineno-13-26" href="#__codelineno-13-26"></a>
-<a id="__codelineno-13-27" name="__codelineno-13-27" href="#__codelineno-13-27"></a><span class="c1"># Paymasters</span>
-<a id="__codelineno-13-28" name="__codelineno-13-28" href="#__codelineno-13-28"></a>solen-cli<span class="w"> </span>register-paymaster<span class="w"> </span>&lt;from&gt;
-<a id="__codelineno-13-29" name="__codelineno-13-29" href="#__codelineno-13-29"></a>solen-cli<span class="w"> </span>unregister-paymaster<span class="w"> </span>&lt;from&gt;
-<a id="__codelineno-13-30" name="__codelineno-13-30" href="#__codelineno-13-30"></a>
-<a id="__codelineno-13-31" name="__codelineno-13-31" href="#__codelineno-13-31"></a><span class="c1"># Guardian recovery</span>
-<a id="__codelineno-13-32" name="__codelineno-13-32" href="#__codelineno-13-32"></a>solen-cli<span class="w"> </span>initiate-recovery<span class="w"> </span>&lt;from&gt;<span class="w"> </span>&lt;target&gt;<span class="w"> </span>&lt;new-public-key&gt;
-<a id="__codelineno-13-33" name="__codelineno-13-33" href="#__codelineno-13-33"></a>solen-cli<span class="w"> </span>confirm-recovery<span class="w"> </span>&lt;from&gt;<span class="w"> </span>&lt;recovery-id&gt;
-<a id="__codelineno-13-34" name="__codelineno-13-34" href="#__codelineno-13-34"></a>solen-cli<span class="w"> </span>cancel-recovery<span class="w"> </span>&lt;from&gt;<span class="w"> </span>&lt;recovery-id&gt;
-<a id="__codelineno-13-35" name="__codelineno-13-35" href="#__codelineno-13-35"></a>solen-cli<span class="w"> </span>execute-recovery<span class="w"> </span>&lt;from&gt;<span class="w"> </span>&lt;recovery-id&gt;
-<a id="__codelineno-13-36" name="__codelineno-13-36" href="#__codelineno-13-36"></a>
-<a id="__codelineno-13-37" name="__codelineno-13-37" href="#__codelineno-13-37"></a><span class="c1"># Key management</span>
-<a id="__codelineno-13-38" name="__codelineno-13-38" href="#__codelineno-13-38"></a>solen-cli<span class="w"> </span>key<span class="w"> </span>generate<span class="w"> </span>&lt;name&gt;
-<a id="__codelineno-13-39" name="__codelineno-13-39" href="#__codelineno-13-39"></a>solen-cli<span class="w"> </span>key<span class="w"> </span>import<span class="w"> </span>&lt;name&gt;<span class="w"> </span>&lt;seed-hex&gt;
-<a id="__codelineno-13-40" name="__codelineno-13-40" href="#__codelineno-13-40"></a>solen-cli<span class="w"> </span>key<span class="w"> </span>list
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>solen-cli<span class="w"> </span>withdraw-stake<span class="w"> </span>&lt;from&gt;
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>
+<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a><span class="c1"># Governance</span>
+<a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a>solen-cli<span class="w"> </span>propose-block-time<span class="w"> </span>&lt;from&gt;<span class="w"> </span>&lt;ms&gt;<span class="w"> </span>&lt;description&gt;
+<a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a>solen-cli<span class="w"> </span>vote<span class="w"> </span>&lt;from&gt;<span class="w"> </span>&lt;proposal-id&gt;<span class="w"> </span>--yes<span class="w"> </span>&lt;weight&gt;
+<a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a>solen-cli<span class="w"> </span>finalize-proposal<span class="w"> </span>&lt;from&gt;<span class="w"> </span>&lt;proposal-id&gt;
+<a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a>solen-cli<span class="w"> </span>execute-proposal<span class="w"> </span>&lt;from&gt;<span class="w"> </span>&lt;proposal-id&gt;
+<a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a>
+<a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a><span class="c1"># Contracts</span>
+<a id="__codelineno-13-22" name="__codelineno-13-22" href="#__codelineno-13-22"></a>solen-cli<span class="w"> </span>deploy<span class="w"> </span>&lt;from&gt;<span class="w"> </span>&lt;wasm-file&gt;
+<a id="__codelineno-13-23" name="__codelineno-13-23" href="#__codelineno-13-23"></a>solen-cli<span class="w"> </span>call<span class="w"> </span>&lt;from&gt;<span class="w"> </span>&lt;target&gt;<span class="w"> </span>&lt;method&gt;<span class="w"> </span><span class="o">[</span>--args<span class="w"> </span>&lt;hex&gt;<span class="o">]</span>
+<a id="__codelineno-13-24" name="__codelineno-13-24" href="#__codelineno-13-24"></a>
+<a id="__codelineno-13-25" name="__codelineno-13-25" href="#__codelineno-13-25"></a><span class="c1"># Rollups</span>
+<a id="__codelineno-13-26" name="__codelineno-13-26" href="#__codelineno-13-26"></a>solen-cli<span class="w"> </span>register-rollup<span class="w"> </span>&lt;from&gt;<span class="w"> </span>&lt;rollup-id&gt;<span class="w"> </span>&lt;name&gt;<span class="w"> </span><span class="o">[</span>--proof-type<span class="w"> </span>mock<span class="o">]</span><span class="w"> </span><span class="o">[</span>--genesis-state-root<span class="w"> </span>&lt;hex&gt;<span class="o">]</span>
+<a id="__codelineno-13-27" name="__codelineno-13-27" href="#__codelineno-13-27"></a>
+<a id="__codelineno-13-28" name="__codelineno-13-28" href="#__codelineno-13-28"></a><span class="c1"># Paymasters</span>
+<a id="__codelineno-13-29" name="__codelineno-13-29" href="#__codelineno-13-29"></a>solen-cli<span class="w"> </span>register-paymaster<span class="w"> </span>&lt;from&gt;
+<a id="__codelineno-13-30" name="__codelineno-13-30" href="#__codelineno-13-30"></a>solen-cli<span class="w"> </span>unregister-paymaster<span class="w"> </span>&lt;from&gt;
+<a id="__codelineno-13-31" name="__codelineno-13-31" href="#__codelineno-13-31"></a>
+<a id="__codelineno-13-32" name="__codelineno-13-32" href="#__codelineno-13-32"></a><span class="c1"># Guardian recovery</span>
+<a id="__codelineno-13-33" name="__codelineno-13-33" href="#__codelineno-13-33"></a>solen-cli<span class="w"> </span>initiate-recovery<span class="w"> </span>&lt;from&gt;<span class="w"> </span>&lt;target&gt;<span class="w"> </span>&lt;new-public-key&gt;
+<a id="__codelineno-13-34" name="__codelineno-13-34" href="#__codelineno-13-34"></a>solen-cli<span class="w"> </span>confirm-recovery<span class="w"> </span>&lt;from&gt;<span class="w"> </span>&lt;recovery-id&gt;
+<a id="__codelineno-13-35" name="__codelineno-13-35" href="#__codelineno-13-35"></a>solen-cli<span class="w"> </span>cancel-recovery<span class="w"> </span>&lt;from&gt;<span class="w"> </span>&lt;recovery-id&gt;
+<a id="__codelineno-13-36" name="__codelineno-13-36" href="#__codelineno-13-36"></a>solen-cli<span class="w"> </span>execute-recovery<span class="w"> </span>&lt;from&gt;<span class="w"> </span>&lt;recovery-id&gt;
+<a id="__codelineno-13-37" name="__codelineno-13-37" href="#__codelineno-13-37"></a>
+<a id="__codelineno-13-38" name="__codelineno-13-38" href="#__codelineno-13-38"></a><span class="c1"># Key management</span>
+<a id="__codelineno-13-39" name="__codelineno-13-39" href="#__codelineno-13-39"></a>solen-cli<span class="w"> </span>key<span class="w"> </span>generate<span class="w"> </span>&lt;name&gt;
+<a id="__codelineno-13-40" name="__codelineno-13-40" href="#__codelineno-13-40"></a>solen-cli<span class="w"> </span>key<span class="w"> </span>import<span class="w"> </span>&lt;name&gt;<span class="w"> </span>&lt;seed-hex&gt;
+<a id="__codelineno-13-41" name="__codelineno-13-41" href="#__codelineno-13-41"></a>solen-cli<span class="w"> </span>key<span class="w"> </span>list
 </code></pre></div>
 <p>All amount values are in SOLEN (human-readable). Decimals supported (e.g., <code>100.5</code>).
 Use <code>--rpc &lt;url&gt;</code> to specify the RPC endpoint and <code>--chain-id &lt;id&gt;</code> for the network.</p>

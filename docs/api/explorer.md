@@ -310,6 +310,80 @@ Returns `null` if no source has been published.
 
 ---
 
+### `GET /api/rollups`
+
+List all registered rollup domains.
+
+**Response:** Array of rollup objects:
+
+```json
+[
+  {
+    "rollup_id": 1,
+    "name": "Solen Test Rollup",
+    "proof_type": "mock",
+    "sequencer": "43a72e71...",
+    "genesis_state_root": "",
+    "registered_at_height": 34200
+  }
+]
+```
+
+---
+
+### `GET /api/rollups/:rollup_id`
+
+Get rollup detail including batch count and latest batch.
+
+**Response:**
+
+```json
+{
+  "rollup_id": 1,
+  "name": "Solen Test Rollup",
+  "proof_type": "mock",
+  "sequencer": "43a72e71...",
+  "registered_at_height": 34200,
+  "total_batches": 3,
+  "latest_batch": { "batch_index": 3, "state_root": "f6c344...", "verified": true }
+}
+```
+
+---
+
+### `GET /api/rollups/:rollup_id/batches`
+
+Get verified batch history for a rollup.
+
+**Response:** Array of batch objects with `rollup_id`, `batch_index`, `state_root`, `data_hash`, `verified`, `block_height`.
+
+---
+
+### `GET /api/intents`
+
+Get recently fulfilled intents.
+
+**Query parameters:** `limit` (default 20)
+
+**Response:** Array of intent objects:
+
+```json
+[
+  {
+    "intent_id": 0,
+    "sender": "43a72e71...",
+    "block_height": 36316,
+    "tx_index": 0,
+    "transfer_to": "094c8cce...",
+    "transfer_amount": "10000000000",
+    "solver_tip": "100000000",
+    "solver": "8a88e3dd..."
+  }
+]
+```
+
+---
+
 ## Pagination
 
 All list endpoints (`/api/blocks`, `/api/txs`, `/api/events`, `/api/accounts/:id/txs`) support pagination:
