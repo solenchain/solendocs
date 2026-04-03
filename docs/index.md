@@ -38,7 +38,7 @@ Solen narrows the responsibilities of the base layer and treats execution domain
 | Rust crates | 17 |
 | TypeScript packages | 2 |
 | Rust source lines | ~21,000 |
-| Test functions | 159 |
+| Test functions | 198 |
 | Property tests | 4 (hundreds of cases each) |
 | Fuzz targets | 3 |
 | RPC methods | 20 |

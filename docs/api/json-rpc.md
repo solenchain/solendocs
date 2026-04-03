@@ -515,7 +515,7 @@ System contracts are invoked via `solen_submitOperation` with `Action::Call` tar
 
 | Address | Contract | Available Methods |
 |---------|----------|-------------------|
-| `0xFFFF...FF01` | Staking | `register`, `delegate`, `undelegate`, `withdraw`, `set_commission` |
+| `0xFFFF...FF01` | Staking | `register`, `delegate`, `undelegate`, `withdraw`, `set_commission`, `rotate_key` |
 | `0xFFFF...FF02` | Governance | `propose_set_base_fee`, `propose_set_block_time`, `vote`, `finalize`, `execute` |
 | `0xFFFF...FF03` | Bridge | `register_vault`, `deposit`, `register_rollup` |
 | `0xFFFF...FF04` | Treasury | `status` |
@@ -539,6 +539,9 @@ Args: none
 
 **`set_commission`** — Set validator commission rate (validator only).
 Args: `commission_bps[8 bytes LE]` (e.g., 1000 = 10%, max 10000 = 100%)
+
+**`rotate_key`** — Request a validator key rotation. The new key takes effect at the next epoch boundary. All delegation records are updated automatically.
+Args: `new_key[32 bytes]` (the new validator public key)
 
 ### Reward Distribution
 

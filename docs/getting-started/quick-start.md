@@ -36,7 +36,7 @@ cargo build --workspace
 cargo test --workspace
 ```
 
-This runs 135 tests including unit tests, 4 property-based invariant tests, and integration tests across all crates.
+This runs 198 tests including unit tests, 4 property-based invariant tests, security regression tests, adversarial consensus tests, VM sandbox tests, and integration tests across all crates.
 
 ## Start a Node
 

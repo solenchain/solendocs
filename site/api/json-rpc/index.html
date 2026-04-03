@@ -3564,7 +3564,7 @@
 <tr>
 <td><code>0xFFFF...FF01</code></td>
 <td>Staking</td>
-<td><code>register</code>, <code>delegate</code>, <code>undelegate</code>, <code>withdraw</code>, <code>set_commission</code></td>
+<td><code>register</code>, <code>delegate</code>, <code>undelegate</code>, <code>withdraw</code>, <code>set_commission</code>, <code>rotate_key</code></td>
 </tr>
 <tr>
 <td><code>0xFFFF...FF02</code></td>
@@ -3609,6 +3609,8 @@ Args: <code>validator_address[32 bytes] + amount[16 bytes LE]</code></p>
 Args: none</p>
 <p><strong><code>set_commission</code></strong> — Set validator commission rate (validator only).
 Args: <code>commission_bps[8 bytes LE]</code> (e.g., 1000 = 10%, max 10000 = 100%)</p>
+<p><strong><code>rotate_key</code></strong> — Request a validator key rotation. The new key takes effect at the next epoch boundary. All delegation records are updated automatically.
+Args: <code>new_key[32 bytes]</code> (the new validator public key)</p>
 <h3 id="reward-distribution">Reward Distribution<a class="headerlink" href="#reward-distribution" title="Permanent link">&para;</a></h3>
 <p>Rewards are distributed every epoch (~100 blocks / ~3.3 minutes):</p>
 <table>
