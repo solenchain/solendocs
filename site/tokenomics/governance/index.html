@@ -2071,31 +2071,78 @@
 <li><strong>Execution</strong> — Proposal is applied automatically</li>
 </ol>
 <h2 id="what-governance-can-change">What Governance Can Change<a class="headerlink" href="#what-governance-can-change" title="Permanent link">&para;</a></h2>
-<p><strong>Implemented:</strong></p>
-<ul>
-<li>Base fee per gas (<code>propose-set-base-fee</code>)</li>
-<li>Block time (<code>propose-block-time</code>)</li>
-<li>Emergency pause/resume</li>
-</ul>
-<p><strong>Planned:</strong></p>
-<ul>
-<li>Burn rate</li>
-<li>Epoch rewards</li>
-<li>Staking parameters (minimum stake, unbonding period)</li>
-<li>Rollup registration</li>
-</ul>
+<p>All network parameters are configurable via governance proposals. Current values are displayed on the <a href="https://solenscan.io">explorer homepage</a>.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>CLI Command</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Block time</td>
+<td><code>propose-block-time &lt;key&gt; &lt;ms&gt; "&lt;desc&gt;"</code></td>
+<td>Block production interval in milliseconds</td>
+</tr>
+<tr>
+<td>Base fee</td>
+<td><code>propose-set-base-fee &lt;key&gt; &lt;fee&gt; "&lt;desc&gt;"</code></td>
+<td>Minimum fee per gas unit (base units)</td>
+</tr>
+<tr>
+<td>Fee burn rate</td>
+<td><code>propose-set-burn-rate &lt;key&gt; &lt;bps&gt; "&lt;desc&gt;"</code></td>
+<td>Percentage of fees burned (basis points, 0-10000)</td>
+</tr>
+<tr>
+<td>Epoch rewards</td>
+<td><code>propose-set-epoch-reward &lt;key&gt; &lt;amount&gt; "&lt;desc&gt;"</code></td>
+<td>Staking rewards per epoch (base units)</td>
+</tr>
+<tr>
+<td>Min validator stake</td>
+<td><code>propose-set-min-validator-stake &lt;key&gt; &lt;amount&gt; "&lt;desc&gt;"</code></td>
+<td>Minimum self-stake to register as validator (base units)</td>
+</tr>
+<tr>
+<td>Unbonding period</td>
+<td><code>propose-set-unbonding-period &lt;key&gt; &lt;epochs&gt; "&lt;desc&gt;"</code></td>
+<td>Cooldown before unstaked tokens can be withdrawn</td>
+</tr>
+<tr>
+<td>Emergency pause</td>
+<td>via system call</td>
+<td>Halt all transaction processing</td>
+</tr>
+<tr>
+<td>Emergency resume</td>
+<td>via system call</td>
+<td>Resume from emergency pause</td>
+</tr>
+</tbody>
+</table>
 <h3 id="governance-cli-commands">Governance CLI Commands<a class="headerlink" href="#governance-cli-commands" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Propose changing the block time</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>solen<span class="w"> </span>propose-block-time<span class="w"> </span>&lt;keyname&gt;<span class="w"> </span>&lt;ms&gt;<span class="w"> </span><span class="s2">&quot;&lt;description&gt;&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Propose changing the block time to 3 seconds</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>solen<span class="w"> </span>propose-block-time<span class="w"> </span>mykey<span class="w"> </span><span class="m">3000</span><span class="w"> </span><span class="s2">&quot;Increase block time for stability&quot;</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># Vote on a proposal (--yes or omit for no)</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>solen<span class="w"> </span>vote<span class="w"> </span>&lt;keyname&gt;<span class="w"> </span>&lt;proposal_id&gt;<span class="w"> </span>--yes<span class="w"> </span>--weight<span class="w"> </span>&lt;solen_amount&gt;
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1"># Finalize after voting period ends</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>solen<span class="w"> </span>finalize-proposal<span class="w"> </span>&lt;keyname&gt;<span class="w"> </span>&lt;proposal_id&gt;
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="c1"># Execute after timelock expires</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>solen<span class="w"> </span>execute-proposal<span class="w"> </span>&lt;keyname&gt;<span class="w"> </span>&lt;proposal_id&gt;
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># Propose changing minimum validator stake to 1M SOLEN</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>solen<span class="w"> </span>--network<span class="w"> </span>testnet<span class="w"> </span>call<span class="w"> </span>mykey<span class="w"> </span>&lt;governance-address&gt;<span class="w"> </span>propose_set_min_validator_stake<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">  </span>--args<span class="w"> </span><span class="s2">&quot;&lt;new_min_stake_16_bytes_le&gt;&lt;description&gt;&quot;</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="c1"># Propose changing unbonding period to 14 epochs</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>solen<span class="w"> </span>--network<span class="w"> </span>testnet<span class="w"> </span>call<span class="w"> </span>mykey<span class="w"> </span>&lt;governance-address&gt;<span class="w"> </span>propose_set_unbonding_period<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">  </span>--args<span class="w"> </span><span class="s2">&quot;&lt;new_period_8_bytes_le&gt;&lt;description&gt;&quot;</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="c1"># Vote on a proposal (--yes or omit for no)</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>solen<span class="w"> </span>vote<span class="w"> </span>&lt;keyname&gt;<span class="w"> </span>&lt;proposal_id&gt;<span class="w"> </span>--yes<span class="w"> </span>--weight<span class="w"> </span>&lt;solen_amount&gt;
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="c1"># Finalize after voting period ends</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>solen<span class="w"> </span>finalize-proposal<span class="w"> </span>&lt;keyname&gt;<span class="w"> </span>&lt;proposal_id&gt;
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="c1"># Execute after timelock expires</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>solen<span class="w"> </span>execute-proposal<span class="w"> </span>&lt;keyname&gt;<span class="w"> </span>&lt;proposal_id&gt;
 </code></pre></div>
 <h3 id="vote-weight-verification">Vote Weight Verification<a class="headerlink" href="#vote-weight-verification" title="Permanent link">&para;</a></h3>
 <p>Vote weight is verified against actual staked tokens at the time of voting. Voters must have staked tokens, and only stake that was active in the prior epoch is eligible for voting. This prevents flash-stake attacks where tokens are staked momentarily just to influence a vote.</p>

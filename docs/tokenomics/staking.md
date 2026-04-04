@@ -6,15 +6,17 @@ Solen uses proof-of-stake consensus where validators and delegators stake SOLEN 
 
 Validators run nodes, propose blocks, and participate in consensus.
 
-| Parameter | Value |
-|-----------|-------|
-| Minimum self-stake | 500,000 SOLEN |
-| Slashing (double sign) | 10% of stake + jailing |
-| Slashing (downtime) | 1% after 50 missed blocks |
-| Slashing destination | Foundation Treasury |
-| Unbonding period | 7 epochs |
-| Default commission | 10% (1000 bps) |
-| Genesis validator lock | ~1 year (157,680 epochs) |
+| Parameter | Default | Governance |
+|-----------|---------|-----------|
+| Minimum self-stake | 500,000 SOLEN | Configurable via `propose_set_min_validator_stake` |
+| Unbonding period | 7 epochs | Configurable via `propose_set_unbonding_period` |
+| Slashing (double sign) | 10% of stake + jailing | — |
+| Slashing (downtime) | 1% after 50 missed blocks | — |
+| Slashing destination | Foundation Treasury | — |
+| Default commission | 10% (1000 bps) | — |
+| Genesis validator lock | ~1 year (157,680 epochs) | — |
+
+Current on-chain values are displayed on the [explorer homepage](https://solenscan.io).
 
 ### Becoming a Validator
 

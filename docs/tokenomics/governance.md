@@ -24,24 +24,32 @@ The voting period is set per-network in the genesis config (`governance_voting_p
 
 ## What Governance Can Change
 
-**Implemented:**
+All network parameters are configurable via governance proposals. Current values are displayed on the [explorer homepage](https://solenscan.io).
 
-- Base fee per gas (`propose-set-base-fee`)
-- Block time (`propose-block-time`)
-- Emergency pause/resume
-
-**Planned:**
-
-- Burn rate
-- Epoch rewards
-- Staking parameters (minimum stake, unbonding period)
-- Rollup registration
+| Parameter | CLI Command | Description |
+|-----------|------------|-------------|
+| Block time | `propose-block-time <key> <ms> "<desc>"` | Block production interval in milliseconds |
+| Base fee | `propose-set-base-fee <key> <fee> "<desc>"` | Minimum fee per gas unit (base units) |
+| Fee burn rate | `propose-set-burn-rate <key> <bps> "<desc>"` | Percentage of fees burned (basis points, 0-10000) |
+| Epoch rewards | `propose-set-epoch-reward <key> <amount> "<desc>"` | Staking rewards per epoch (base units) |
+| Min validator stake | `propose-set-min-validator-stake <key> <amount> "<desc>"` | Minimum self-stake to register as validator (base units) |
+| Unbonding period | `propose-set-unbonding-period <key> <epochs> "<desc>"` | Cooldown before unstaked tokens can be withdrawn |
+| Emergency pause | via system call | Halt all transaction processing |
+| Emergency resume | via system call | Resume from emergency pause |
 
 ### Governance CLI Commands
 
 ```bash
-# Propose changing the block time
-solen propose-block-time <keyname> <ms> "<description>"
+# Propose changing the block time to 3 seconds
+solen propose-block-time mykey 3000 "Increase block time for stability"
+
+# Propose changing minimum validator stake to 1M SOLEN
+solen --network testnet call mykey <governance-address> propose_set_min_validator_stake \
+  --args "<new_min_stake_16_bytes_le><description>"
+
+# Propose changing unbonding period to 14 epochs
+solen --network testnet call mykey <governance-address> propose_set_unbonding_period \
+  --args "<new_period_8_bytes_le><description>"
 
 # Vote on a proposal (--yes or omit for no)
 solen vote <keyname> <proposal_id> --yes --weight <solen_amount>

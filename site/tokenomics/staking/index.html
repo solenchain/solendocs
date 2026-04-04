@@ -2170,40 +2170,49 @@
 <thead>
 <tr>
 <th>Parameter</th>
-<th>Value</th>
+<th>Default</th>
+<th>Governance</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Minimum self-stake</td>
 <td>500,000 SOLEN</td>
-</tr>
-<tr>
-<td>Slashing (double sign)</td>
-<td>10% of stake + jailing</td>
-</tr>
-<tr>
-<td>Slashing (downtime)</td>
-<td>1% after 50 missed blocks</td>
-</tr>
-<tr>
-<td>Slashing destination</td>
-<td>Foundation Treasury</td>
+<td>Configurable via <code>propose_set_min_validator_stake</code></td>
 </tr>
 <tr>
 <td>Unbonding period</td>
 <td>7 epochs</td>
+<td>Configurable via <code>propose_set_unbonding_period</code></td>
+</tr>
+<tr>
+<td>Slashing (double sign)</td>
+<td>10% of stake + jailing</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Slashing (downtime)</td>
+<td>1% after 50 missed blocks</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Slashing destination</td>
+<td>Foundation Treasury</td>
+<td>—</td>
 </tr>
 <tr>
 <td>Default commission</td>
 <td>10% (1000 bps)</td>
+<td>—</td>
 </tr>
 <tr>
 <td>Genesis validator lock</td>
 <td>~1 year (157,680 epochs)</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
+<p>Current on-chain values are displayed on the <a href="https://solenscan.io">explorer homepage</a>.</p>
 <h3 id="becoming-a-validator">Becoming a Validator<a class="headerlink" href="#becoming-a-validator" title="Permanent link">&para;</a></h3>
 <p>Register as a validator via the staking system contract:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>solen<span class="w"> </span>--chain-id<span class="w"> </span><span class="m">9000</span><span class="w"> </span>register-validator<span class="w"> </span>&lt;keyname&gt;<span class="w"> </span><span class="m">500000</span>
