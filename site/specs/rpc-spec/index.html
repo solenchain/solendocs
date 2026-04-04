@@ -1833,10 +1833,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#solen_getvalidatorsetepoch" class="md-nav__link">
+  <a href="#solen_getvalidators" class="md-nav__link">
     <span class="md-ellipsis">
       
-        solen_getValidatorSet(epoch?)
+        solen_getValidators()
       
     </span>
   </a>
@@ -2075,10 +2075,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#solen_getvalidatorsetepoch" class="md-nav__link">
+  <a href="#solen_getvalidators" class="md-nav__link">
     <span class="md-ellipsis">
       
-        solen_getValidatorSet(epoch?)
+        solen_getValidators()
       
     </span>
   </a>
@@ -2261,11 +2261,11 @@
 <li><strong>Parameters:</strong> <code>height</code> — block number (u64) or string <code>"latest"</code></li>
 <li><strong>Returns:</strong> Block header and execution summary</li>
 </ul>
-<h3 id="solen_getvalidatorsetepoch"><code>solen_getValidatorSet(epoch?)</code><a class="headerlink" href="#solen_getvalidatorsetepoch" title="Permanent link">&para;</a></h3>
-<p>Returns the validator set for a given epoch, or the current epoch if omitted.</p>
+<h3 id="solen_getvalidators"><code>solen_getValidators()</code><a class="headerlink" href="#solen_getvalidators" title="Permanent link">&para;</a></h3>
+<p>Returns the current validator set with stake and status information.</p>
 <ul>
-<li><strong>Parameters:</strong> <code>epoch</code> — optional epoch number</li>
-<li><strong>Returns:</strong> List of validators with stakes and status</li>
+<li><strong>Parameters:</strong> none</li>
+<li><strong>Returns:</strong> List of validators with self-stake, delegated stake, active status, genesis flag, and commission rate</li>
 </ul>
 <h2 id="write-operations">Write Operations<a class="headerlink" href="#write-operations" title="Permanent link">&para;</a></h2>
 <h3 id="solen_submitoperationsigned_op"><code>solen_submitOperation(signed_op)</code><a class="headerlink" href="#solen_submitoperationsigned_op" title="Permanent link">&para;</a></h3>

@@ -2970,15 +2970,42 @@
 <tbody>
 <tr>
 <td><code>--rpc &lt;URL&gt;</code></td>
-<td>JSON-RPC endpoint (default: <code>http://127.0.0.1:9944</code>)</td>
+<td>JSON-RPC endpoint (overrides <code>--network</code> default)</td>
 </tr>
 <tr>
 <td><code>--network &lt;NETWORK&gt;</code></td>
-<td>Use network defaults (devnet, testnet, mainnet)</td>
+<td>Network preset: <code>devnet</code> (default), <code>testnet</code>, or <code>mainnet</code>. Sets RPC endpoint and chain ID.</td>
 </tr>
 <tr>
 <td><code>--chain-id &lt;ID&gt;</code></td>
-<td>Chain ID for signing (devnet=1337, testnet=9000, mainnet=1)</td>
+<td>Chain ID for signing (overrides <code>--network</code> default)</td>
+</tr>
+</tbody>
+</table>
+<p>Network defaults:</p>
+<table>
+<thead>
+<tr>
+<th>Network</th>
+<th>RPC Endpoint</th>
+<th>Chain ID</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>devnet</td>
+<td><code>http://127.0.0.1:29944</code></td>
+<td>1337</td>
+</tr>
+<tr>
+<td>testnet</td>
+<td><code>https://testnet-rpc.solenchain.io</code></td>
+<td>9000</td>
+</tr>
+<tr>
+<td>mainnet</td>
+<td><code>https://rpc.solenchain.io</code></td>
+<td>1</td>
 </tr>
 </tbody>
 </table>
