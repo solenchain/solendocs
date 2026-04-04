@@ -852,6 +852,28 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#unjailing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unjailing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backup-proposers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backup Proposers
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2026,6 +2048,28 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#unjailing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unjailing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backup-proposers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backup Proposers
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2142,10 +2186,17 @@
 <h3 id="downtime">Downtime<a class="headerlink" href="#downtime" title="Permanent link">&para;</a></h3>
 <p>Missing 50 consecutive blocks results in:</p>
 <ul>
-<li><strong>1% stake penalty</strong></li>
-<li>The validator remains in the active set but may be rotated out</li>
+<li><strong>1% stake penalty</strong> applied to the validator and their delegators</li>
+<li><strong>Jailing</strong> — the validator is removed from the active set</li>
 </ul>
+<h3 id="unjailing">Unjailing<a class="headerlink" href="#unjailing" title="Permanent link">&para;</a></h3>
+<p>A jailed validator can be reactivated by submitting an <code>unjail</code> transaction. The validator rejoins the active consensus set at the next epoch boundary and resumes block production in the round-robin rotation.</p>
+<h3 id="backup-proposers">Backup Proposers<a class="headerlink" href="#backup-proposers" title="Permanent link">&para;</a></h3>
+<p>When the designated proposer is offline, backup proposers take over in deterministic order — the next validator in the round-robin sequence after the designated proposer. The first backup waits <strong>3x block_time</strong> (18s on mainnet) before proposing. Each subsequent backup waits an additional <strong>2x block_time</strong> (12s on mainnet) beyond the previous backup's deadline. This ensures liveness even when multiple consecutive proposers are unavailable.</p>
 <p>All slashed funds are sent to the <strong>Foundation Treasury</strong> (<code>0xFFFF...FF04</code>).</p>
+<blockquote>
+<p><strong>Note:</strong> Slashing is deterministic and on-chain — penalties are executed as system transactions within blocks, not applied out-of-band.</p>
+</blockquote>
 <h2 id="dynamic-validator-set">Dynamic Validator Set<a class="headerlink" href="#dynamic-validator-set" title="Permanent link">&para;</a></h2>
 <p>The consensus engine syncs with the staking contract at each epoch boundary (every 100 blocks). New validators who register via the <code>register</code> staking method are automatically added to the active proposer rotation at the next epoch. Validators earn rewards starting one epoch after registration.</p>
 <h2 id="checkpoints">Checkpoints<a class="headerlink" href="#checkpoints" title="Permanent link">&para;</a></h2>

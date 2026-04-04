@@ -1555,6 +1555,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#unjailing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unjailing
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2093,6 +2104,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#unjailing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unjailing
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2248,7 +2270,16 @@
 <p>Missing 50 consecutive blocks:</p>
 <ul>
 <li><strong>1% stake penalty</strong> — Applied to validator and delegators</li>
+<li><strong>Jailing</strong> — Validator removed from the active set</li>
 </ul>
+<h3 id="unjailing">Unjailing<a class="headerlink" href="#unjailing" title="Permanent link">&para;</a></h3>
+<p>A jailed validator (whether from downtime or double signing) can be reactivated by submitting an <code>unjail</code> transaction:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>solen<span class="w"> </span>unjail<span class="w"> </span>&lt;keyname&gt;
+</code></pre></div>
+<p>The validator rejoins the active consensus set at the next epoch boundary. Slashed funds are sent to the <strong>Foundation Treasury</strong> and can be restored via a <a href="../governance/">governance proposal</a> if the community votes to do so.</p>
+<blockquote>
+<p><strong>Note:</strong> Slashing is deterministic and on-chain — penalties are executed as system transactions within blocks, not applied out-of-band.</p>
+</blockquote>
 <h2 id="unbonding">Unbonding<a class="headerlink" href="#unbonding" title="Permanent link">&para;</a></h2>
 <p>When undelegating, tokens enter a 7-epoch unbonding period before they can be transferred. During unbonding:</p>
 <ul>

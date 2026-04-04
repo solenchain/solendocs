@@ -1797,6 +1797,67 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Validator Operations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#status-and-monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Status and Monitoring
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#staking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Staking
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slashing-and-unjailing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Slashing and Unjailing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exiting-full-unstake" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exiting (Full Unstake)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#re-entry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Re-entry
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -2378,6 +2439,67 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Validator Operations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#status-and-monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Status and Monitoring
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#staking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Staking
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slashing-and-unjailing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Slashing and Unjailing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exiting-full-unstake" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exiting (Full Unstake)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#re-entry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Re-entry
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -2775,38 +2897,87 @@
 </tbody>
 </table>
 <h3 id="validator-operations">Validator Operations<a class="headerlink" href="#validator-operations" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># Add more stake</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>solen<span class="w"> </span>stake<span class="w"> </span>my-validator<span class="w"> </span>&lt;validator-address&gt;<span class="w"> </span>&lt;amount&gt;
+<h4 id="status-and-monitoring">Status and Monitoring<a class="headerlink" href="#status-and-monitoring" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># List all validators and their stake/status</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>solen<span class="w"> </span>validators
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="c1"># Begin unstaking (subject to unbonding period)</span>
-<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>solen<span class="w"> </span>unstake<span class="w"> </span>my-validator<span class="w"> </span>&lt;validator-address&gt;<span class="w"> </span>&lt;amount&gt;
-<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>
-<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="c1"># Check your validator status</span>
-<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>solen<span class="w"> </span>validators
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="c1"># Check your account balance and nonce</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>solen<span class="w"> </span>account<span class="w"> </span>my-validator
 </code></pre></div>
+<h4 id="staking">Staking<a class="headerlink" href="#staking" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># Add more self-stake to your validator</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>solen<span class="w"> </span>stake<span class="w"> </span>my-validator<span class="w"> </span>&lt;your-validator-address&gt;<span class="w"> </span>&lt;amount&gt;
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="c1"># Delegate to another validator</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>solen<span class="w"> </span>stake<span class="w"> </span>my-validator<span class="w"> </span>&lt;other-validator-address&gt;<span class="w"> </span>&lt;amount&gt;
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="c1"># Begin unstaking (enters 7-epoch unbonding period)</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>solen<span class="w"> </span>unstake<span class="w"> </span>my-validator<span class="w"> </span>&lt;validator-address&gt;<span class="w"> </span>&lt;amount&gt;
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="c1"># Withdraw matured unstaked tokens after unbonding completes</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>solen<span class="w"> </span>withdraw-stake<span class="w"> </span>my-validator
+</code></pre></div>
+<p>All amounts are in <strong>SOLEN</strong> (not base units). Decimals are supported: <code>100.5</code> = 100.5 SOLEN.</p>
+<h4 id="slashing-and-unjailing">Slashing and Unjailing<a class="headerlink" href="#slashing-and-unjailing" title="Permanent link">&para;</a></h4>
+<p>If your validator misses <strong>50 consecutive blocks</strong>, it will be automatically slashed:</p>
+<ul>
+<li><strong>1% of self-stake</strong> is deducted and sent to the Foundation Treasury</li>
+<li>The validator is <strong>jailed</strong> (removed from the active consensus set)</li>
+<li>The validator stops earning rewards and producing blocks</li>
+</ul>
+<p>To reactivate a jailed validator:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>solen<span class="w"> </span>unjail<span class="w"> </span>my-validator
+</code></pre></div>
+<p>The validator rejoins the active set at the <strong>next epoch boundary</strong> (every 100 blocks). Slashed funds held in the treasury can be restored via a governance proposal if the community deems it appropriate.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>While jailed, your node is still running but not participating in consensus. Delegators staked with a jailed validator do not earn rewards. Reactivate promptly to minimize downtime for yourself and your delegators.</p>
+</div>
+<h4 id="exiting-full-unstake">Exiting (Full Unstake)<a class="headerlink" href="#exiting-full-unstake" title="Permanent link">&para;</a></h4>
+<p>To permanently exit as a validator:</p>
+<ol>
+<li>Unstake your entire self-stake:
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>solen<span class="w"> </span>unstake<span class="w"> </span>my-validator<span class="w"> </span>&lt;your-validator-address&gt;<span class="w"> </span>&lt;full-amount&gt;
+</code></pre></div></li>
+<li>Wait for the 7-epoch unbonding period</li>
+<li>Withdraw the matured tokens:
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>solen<span class="w"> </span>withdraw-stake<span class="w"> </span>my-validator
+</code></pre></div></li>
+</ol>
+<p>Once your self-stake drops below the minimum (500,000 SOLEN), the validator is removed from the active set at the next epoch boundary. You can stop the node after withdrawing.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Genesis validators are locked for ~1 year (157,680 epochs) and cannot unstake during the lock period.</p>
+</div>
+<h4 id="re-entry">Re-entry<a class="headerlink" href="#re-entry" title="Permanent link">&para;</a></h4>
+<p>A validator that previously exited can re-register with a new stake:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>solen<span class="w"> </span>register-validator<span class="w"> </span>my-validator<span class="w"> </span><span class="m">500000</span>
+</code></pre></div>
+<p>The same key and node can be reused. The validator rejoins the active set at the next epoch boundary after registration.</p>
 <h3 id="important-notes">Important Notes<a class="headerlink" href="#important-notes" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Never share your validator seed.</strong> It controls your validator identity and staked funds.</li>
-<li><strong>Never delete the data directory</strong> while the chain is running. Restart is fine, but wiping data requires a full resync.</li>
-<li><strong>Keep your node online.</strong> Extended downtime (50+ consecutive missed blocks) may result in slashing.</li>
+<li><strong>Never delete the data directory</strong> while the chain is running. Restart is fine, but wiping data requires a full resync (or snapshot sync).</li>
+<li><strong>Keep your node online.</strong> Extended downtime (50+ consecutive missed blocks) results in a 1% slash and jailing. Use <code>solen unjail</code> to reactivate.</li>
 <li>Your validator earns epoch rewards proportional to its stake. Default commission is 10% on delegator rewards.</li>
+<li>Slashing is <strong>deterministic and on-chain</strong> — it executes as a system transaction in a block, so all nodes apply it identically.</li>
 </ul>
 <h2 id="production-deployment">Production Deployment<a class="headerlink" href="#production-deployment" title="Permanent link">&para;</a></h2>
 <p>For production or testnet deployment, see <a href="../testnet-deployment/">Testnet Deployment</a>.</p>
 <h3 id="systemd-service">systemd Service<a class="headerlink" href="#systemd-service" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">[Unit]</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="na">Description</span><span class="o">=</span><span class="s">Solen Node</span>
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="na">After</span><span class="o">=</span><span class="s">network.target</span>
-<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
-<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="k">[Service]</span>
-<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="na">Type</span><span class="o">=</span><span class="s">simple</span>
-<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="na">User</span><span class="o">=</span><span class="s">solen</span>
-<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/local/bin/solen-node --network mainnet</span>
-<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="na">Restart</span><span class="o">=</span><span class="s">always</span>
-<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="na">RestartSec</span><span class="o">=</span><span class="s">5</span>
-<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>
-<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="k">[Install]</span>
-<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="k">[Unit]</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="na">Description</span><span class="o">=</span><span class="s">Solen Node</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="na">After</span><span class="o">=</span><span class="s">network.target</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="k">[Service]</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="na">Type</span><span class="o">=</span><span class="s">simple</span>
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="na">User</span><span class="o">=</span><span class="s">solen</span>
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/local/bin/solen-node --network mainnet</span>
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="na">Restart</span><span class="o">=</span><span class="s">always</span>
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a><span class="na">RestartSec</span><span class="o">=</span><span class="s">5</span>
+<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a>
+<a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a><span class="k">[Install]</span>
+<a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a><span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span>
 </code></pre></div>
 <h3 id="hardware-requirements">Hardware Requirements<a class="headerlink" href="#hardware-requirements" title="Permanent link">&para;</a></h3>
 <table>
@@ -2842,24 +3013,24 @@
 </table>
 <h3 id="data-backup">Data Backup<a class="headerlink" href="#data-backup" title="Permanent link">&para;</a></h3>
 <p>RocksDB data is stored in the <code>--data-dir</code> directory. Back up this directory to preserve chain state.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># Stop the node before backing up</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>systemctl<span class="w"> </span>stop<span class="w"> </span>solen-node
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>cp<span class="w"> </span>-r<span class="w"> </span>data/mainnet<span class="w"> </span>data/mainnet-backup
-<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>systemctl<span class="w"> </span>start<span class="w"> </span>solen-node
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="c1"># Stop the node before backing up</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>systemctl<span class="w"> </span>stop<span class="w"> </span>solen-node
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>cp<span class="w"> </span>-r<span class="w"> </span>data/mainnet<span class="w"> </span>data/mainnet-backup
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>systemctl<span class="w"> </span>start<span class="w"> </span>solen-node
 </code></pre></div>
 <h2 id="monitoring">Monitoring<a class="headerlink" href="#monitoring" title="Permanent link">&para;</a></h2>
 <h3 id="json-rpc-health-check">JSON-RPC Health Check<a class="headerlink" href="#json-rpc-health-check" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>http://127.0.0.1:9944<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;method&quot;:&quot;solen_chainStatus&quot;,&quot;params&quot;:[],&quot;id&quot;:1}&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>http://127.0.0.1:9944<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;method&quot;:&quot;solen_chainStatus&quot;,&quot;params&quot;:[],&quot;id&quot;:1}&#39;</span>
 </code></pre></div>
 <h3 id="explorer-api-status">Explorer API Status<a class="headerlink" href="#explorer-api-status" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>http://127.0.0.1:9955/api/status
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>http://127.0.0.1:9955/api/status
 </code></pre></div>
 <h3 id="logs">Logs<a class="headerlink" href="#logs" title="Permanent link">&para;</a></h3>
 <p>The node logs to stderr using the <code>tracing</code> crate. Set log level with <code>RUST_LOG</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="nv">RUST_LOG</span><span class="o">=</span>info<span class="w"> </span>solen-node
-<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="nv">RUST_LOG</span><span class="o">=</span><span class="nv">solen_consensus</span><span class="o">=</span>debug<span class="w"> </span>solen-node
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="nv">RUST_LOG</span><span class="o">=</span>info<span class="w"> </span>solen-node
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="nv">RUST_LOG</span><span class="o">=</span><span class="nv">solen_consensus</span><span class="o">=</span>debug<span class="w"> </span>solen-node
 </code></pre></div>
 
 
