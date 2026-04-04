@@ -444,9 +444,17 @@ The CLI simulates the call first, then submits if simulation succeeds.
 
 | Option | Description |
 |--------|-------------|
-| `--rpc <URL>` | JSON-RPC endpoint (default: `http://127.0.0.1:9944`) |
-| `--network <NETWORK>` | Use network defaults (devnet, testnet, mainnet) |
-| `--chain-id <ID>` | Chain ID for signing (devnet=1337, testnet=9000, mainnet=1) |
+| `--rpc <URL>` | JSON-RPC endpoint (overrides `--network` default) |
+| `--network <NETWORK>` | Network preset: `devnet` (default), `testnet`, or `mainnet`. Sets RPC endpoint and chain ID. |
+| `--chain-id <ID>` | Chain ID for signing (overrides `--network` default) |
+
+Network defaults:
+
+| Network | RPC Endpoint | Chain ID |
+|---------|-------------|----------|
+| devnet | `http://127.0.0.1:29944` | 1337 |
+| testnet | `https://testnet-rpc.solenchain.io` | 9000 |
+| mainnet | `https://rpc.solenchain.io` | 1 |
 
 ```bash
 # Use a different RPC endpoint

@@ -29,12 +29,12 @@ Returns a block by height or the latest finalized block.
 - **Parameters:** `height` — block number (u64) or string `"latest"`
 - **Returns:** Block header and execution summary
 
-### `solen_getValidatorSet(epoch?)`
+### `solen_getValidators()`
 
-Returns the validator set for a given epoch, or the current epoch if omitted.
+Returns the current validator set with stake and status information.
 
-- **Parameters:** `epoch` — optional epoch number
-- **Returns:** List of validators with stakes and status
+- **Parameters:** none
+- **Returns:** List of validators with self-stake, delegated stake, active status, genesis flag, and commission rate
 
 ## Write Operations
 
