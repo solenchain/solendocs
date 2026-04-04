@@ -83,6 +83,32 @@ Get full account information.
 
 ---
 
+### `solen_getNextNonce`
+
+Get the next usable nonce for an account, accounting for pending transactions in the mempool. Use this instead of reading the nonce from `getAccount` when sending multiple transactions in rapid succession.
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `account_id` | `string` | Account ID (Base58) or public key (hex) |
+
+**Returns:** `u64` — the next nonce to use (on-chain nonce + pending mempool count for this sender).
+
+**Example:**
+
+```bash
+curl -s -X POST http://127.0.0.1:29944 \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","method":"solen_getNextNonce","params":["2ZrMqiKGz6TUvJkyBKyNMf3Y7dMrJ5JqWSCCYGn1VWbp"],"id":1}'
+# Returns: {"jsonrpc":"2.0","id":1,"result":5}
+```
+
+!!! tip
+    When sending multiple transactions from the same account without waiting for block confirmation, use `getNextNonce` for each submission. It returns the on-chain nonce plus the number of pending transactions already in the mempool for that sender.
+
+---
+
 ### `solen_getBlock`
 
 Get a block by height.

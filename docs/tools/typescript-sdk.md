@@ -66,6 +66,15 @@ const account = await client.getAccount("8a88e3dd7409...");
 // { balance: "10000", nonce: 0, code_hash: null }
 ```
 
+#### `getNextNonce(accountId)`
+
+Get the next usable nonce, accounting for pending mempool transactions. Use this instead of `getAccount().nonce` when sending multiple transactions rapidly.
+
+```typescript
+const nonce = await client.getNextNonce("2ZrMqiKGz...");
+// Returns: 5 (on-chain nonce + pending count)
+```
+
 #### `getLatestBlock()`
 
 Get the latest finalized block.

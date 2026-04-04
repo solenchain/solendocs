@@ -22,6 +22,13 @@ Returns full account state including balance, nonce, code hash, and authenticati
 - **Parameters:** `account_id` — Account ID (Base58) or public key (hex)
 - **Returns:** Account object
 
+### `solen_getNextNonce(account_id)`
+
+Returns the next usable nonce for an account, accounting for pending mempool transactions.
+
+- **Parameters:** `account_id` — Account ID (Base58) or public key (hex)
+- **Returns:** Next nonce (u64) = on-chain nonce + pending count
+
 ### `solen_getBlock(height | "latest")`
 
 Returns a block by height or the latest finalized block.
