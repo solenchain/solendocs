@@ -12,14 +12,14 @@ The Solen JSON-RPC API is organized into four groups: state queries, write opera
 
 Returns the native token balance for an account.
 
-- **Parameters:** `account_id` — Base58 (or hex) encoded account ID
+- **Parameters:** `account_id` — Account ID (Base58) or public key (hex)
 - **Returns:** Balance as string
 
 ### `solen_getAccount(account_id)`
 
 Returns full account state including balance, nonce, code hash, and authentication configuration.
 
-- **Parameters:** `account_id` — Base58 (or hex) encoded account ID
+- **Parameters:** `account_id` — Account ID (Base58) or public key (hex)
 - **Returns:** Account object
 
 ### `solen_getBlock(height | "latest")`

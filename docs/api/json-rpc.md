@@ -49,7 +49,7 @@ Get an account's native token balance.
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `account_id` | `string` | Base58 (or hex) encoded account ID |
+| `account_id` | `string` | Account ID (Base58) or public key (hex) |
 
 **Returns:** Balance as a string (to avoid integer overflow in JSON).
 
@@ -71,7 +71,7 @@ Get full account information.
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `account_id` | `string` | Base58 (or hex) encoded account ID |
+| `account_id` | `string` | Account ID (Base58) or public key (hex) |
 
 **Returns:**
 
@@ -238,7 +238,7 @@ Get staking information for an account (delegations, undelegations).
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `account_id` | `string` | Base58 (or hex) encoded account ID |
+| `account_id` | `string` | Account ID (Base58) or public key (hex) |
 
 **Returns:**
 
@@ -320,7 +320,7 @@ Get vesting schedule information for an account.
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `account_id` | `string` | Base58 (or hex) encoded account ID |
+| `account_id` | `string` | Account ID (Base58) or public key (hex) |
 
 **Returns:**
 
